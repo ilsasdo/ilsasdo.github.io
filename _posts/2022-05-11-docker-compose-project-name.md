@@ -4,8 +4,6 @@ title:  "Project Name in Docker Compose"
 tags: docker-pills docker-compose
 ---
 
-# Project Name in Docker Compose
-
 When you run `docker-compose`, automatically it takes the name of the directory you are in and assign it as a *Project Name*.
 
 This means that if you run *another* `docker-compose` in *another* directory with the same name, it will starts all the services described by the `docker-compose.yml` in **both** directories.
