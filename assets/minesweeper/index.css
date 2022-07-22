@@ -1,0 +1,120 @@
+.map {
+  cursor: crosshair;
+}
+
+.cell {
+  display: inline-block;
+  background-color: lightgray;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  vertical-align: bottom;
+  border-style: outset;
+  border-width: 3px;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 12pt;
+
+  user-select: none; /* standard syntax */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+}
+
+.nearby-1 {
+  color: blue;
+}
+
+.nearby-2 {
+  color: green;
+}
+
+.nearby-3 {
+  color: red;
+}
+
+.nearby-4 {
+  color: darkblue;
+}
+
+.nearby-5 {
+  color: darkred;
+}
+
+.nearby-6 {
+  color: darkcyan;
+}
+
+.nearby-7 {
+  color: dimgray;
+}
+
+.nearby-8 {
+  color: gray;
+}
+
+.cell:hover {
+  background-color: #dcdbdb;
+}
+
+.cell.hidden:active {
+  border-style: inset;
+}
+
+.mine, .revealed {
+  border: 1px gray solid;
+  width: 24px;
+  height: 24px;
+}
+
+.mine .wrong-flag {
+  display: inline-block;
+  position: absolute;
+}
+
+.container {
+  display: inline-block;
+  border-style: ridge;
+  border-width: 5px;
+}
+
+.header {
+  border-bottom: ridge 5px;
+  background-color: lightgray;
+}
+
+.header > div {
+  width: 33%;
+  display: inline-block;
+}
+
+.header-flags, .header-time {
+  border-style: inset;
+  border-width: 3px;
+  background-color: black;
+  color: red;
+  font-family: monospace;
+  font-size: 18pt;
+  text-align: right;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.header-newgame {
+  display: inline-block;
+}
+
+.header-newgame button {
+  display: inline;
+  border: outset;
+  font-size: 18pt;
+}
+
+.header-newgame button:active {
+  border: inset;
+}
+
+.header-middle {
+  text-align: center;
+}
