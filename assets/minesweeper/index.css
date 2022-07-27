@@ -74,6 +74,7 @@
 }
 
 .container {
+  position: absolute;
   display: inline-block;
   border-style: ridge;
   border-width: 5px;
