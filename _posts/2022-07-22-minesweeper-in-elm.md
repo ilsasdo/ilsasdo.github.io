@@ -16,7 +16,7 @@ Once get those ideas and made the mental shift needed, it was a breeze.
 [Here you can find the Minesweeper](https://github.com/ilsasdo/elm-minesweeper/blob/master/src/Minesweeper.elm) code (a single ~500 line file).
 
 
-<script src="{{ base.url | prepend: site.url }}/assets/minesweeper/minesweeper.js"></script>
+<script src="{{ base.url | prepend: site.url }}/assets/minesweeper/build.js"></script>
 
 <div id="myapp" style="position: absolute"></div>
 <script>
