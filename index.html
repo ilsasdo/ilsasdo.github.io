@@ -1,103 +1,17 @@
-<!doctype html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Enrico Sasdelli - Software Engineer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
-    <link href="assets/css/custom.css" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <title>Main</title>
+  <script src="build.js"></script>
+  <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-<div id="top" class="container vw-100 vh-100">
-    <div class="row">
-        <div class="col-md-4 text-center mt-5">
-            <div class="photo-wrapper d-inline-block">
-                <img alt="face" src="assets/img/faccione.jpg">
-            </div>
-        </div>
-        <div class="col-md-8 text-center mt-3">
-            <h1 class="gradient-text gradient-brand-primary">Hi, I'm Enrico, nice to meet you!</h1>
-            <ul class="list-group list-group-flush mt-3">
-                <li class="list-group-item"><a href="#about">About me</a></li>
-                <li class="list-group-item"><a href="#projects">Projects</a></li>
-                <li class="list-group-item"><a href="#history">Job History</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div id="about" class="container vw-100 vh-100">
-    <div class="row">
-        <div class="col mt-3">
-            <h2 class="gradient-text gradient-brand-primary mb-3">About me</h2>
-            <p>I'm the father of three beautiful kids and the husband of one wonderful wife.</p>
-            <p>My hobbies includes motorkbikes (I'm a proud Ducati Multistrada owner), boardgames, mechanical keyboards and of course anything related to Computer Science.<p>
-
-            <h3 class="gradient-text gradient-brand-primary mb-3">Technical Background</h3>
-            <p>I call myself a Software Engineer. I like every part of Software Engineering: frontend, backend, devops.</p>
-            <p>While I mostly have a Java/Oracle SQL backend, I like also doing frontend and DevOps. I like to have my projects and code crisp and clear, I value code clarity, cohesion, decoupling.</p>
-            <p>I'm strongly opinionated on how things should be done, but I also know that our job is made of tradeoff and I'm not a zealot by any means.</p>
-            <p>In every project I try to stick with my three pillars of good Software Engineering:
-                <ol>
-                    <li>Cohesion and Decoupling</li>
-                    <li>Good Naming</li>
-                    <li>Code Readability</li>
-                </ol>
-            </p>
-            <p>Currently I'm interested in Functional Programming and I'm learning ELM language with some side projects.</p>
-
-            <hr/>
-            <p class="text-end text-muted"><a href="#top">Back to top</a></p>
-        </div>
-    </div>
-</div>
-<div id="projects" class="container vw-100 vh-100">
-    <div class="row">
-        <div class="col mt-3">
-            <h2 class="gradient-text gradient-brand-primary mb-3">Side Projects</h2>
-            <p>Currently I'm into Functional Programming and I'm learning <a href="https://elm-lang.org/">Elm Language</a> with some game projects:</p>
-
-            <ul>
-                <li><a href="https://github.com/ilsasdo/elm-cavevscave">Uwe Rosenberg's Cave vs Cave</a> game written in Elm <a href="/projects/cavevscave">(play!)</a></li>
-                <li><a href="https://github.com/ilsasdo/elm-minesweeper">Minesweeper</a>: implemented with Elm <a href="/projects/minesweeper">(play!)</a></li>
-            </ul>
-
-            <p>Old projects:</p>
-            <ul>
-                <li><a href="https://github.com/ilsasdo/rainmeter-httprequest">Rainmeter HttpRequest Plugin</a>: a Rainmeter Plugin useful to make http requests.</li>
-                <li><a href="https://github.com/ilsasdo/untangle">Untangle</a>: a tool to inspect class inter-dependencies</li>
-            </ul>
-            <hr/>
-            <p class="text-end text-muted"><a href="#top">Back to top</a></p>
-        </div>
-    </div>
-</div>
-<div id="history" class="container vw-100 vh-100">
-    <div class="row">
-        <div class="col mt-3">
-            <h2 class="gradient-text gradient-brand-primary mb-3">History</h2>
-            <p>Currently I'm employed at <a href="https://www.motork.io/">MotorK</a> as a Senior Backend Engineer</p>
-            <p>My best achievements in MotorK so far are:</p>
-            <ul>
-                <li>Improved the transaction management of the main application by fixing all the PESSIMISTIC LOCK errors.</li>
-                <li>Introduced Liquibase for database schema migration and management.</li>
-                <li>Successfully Refactored the whole feature-flag system</li>
-            </ul>
-
-            <p>Before MotorK I worked for 16 years at <a href="https://www.finmatica.it">Finmatica SpA</a> where I grown professionally and technically.</p>
-            <p>In Finmatica I did a lot of things, bests were:</p>
-            <ul>
-                <li>Built a small, higly configurable workflow engine</li>
-                <li>Built a Java Library to Digitally Sign documents</li>
-                <li>Built the company devops pipeline from build to deploy</li>
-            </ul>
-            <hr/>
-            <p class="text-end text-muted"><a href="#top">Back to top</a></p>
-        </div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<div id="myapp"></div>
+<script>
+  var app = Elm.Minesweeper.init({
+    node: document.getElementById('myapp')
+  });
+</script>
 </body>
 </html>
