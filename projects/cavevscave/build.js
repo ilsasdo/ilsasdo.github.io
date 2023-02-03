@@ -5227,9 +5227,9 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Game$Game = F9(
-	function (player1, player2, round, actions, currentPlayer, actionTiles, availableRooms, availableWalls, stack) {
-		return {actionTiles: actionTiles, actions: actions, availableRooms: availableRooms, availableWalls: availableWalls, currentPlayer: currentPlayer, player1: player1, player2: player2, round: round, stack: stack};
+var $author$project$Game$Game = F8(
+	function (player1, player2, round, actions, actionTiles, availableRooms, availableWalls, stack) {
+		return {actionTiles: actionTiles, actions: actions, availableRooms: availableRooms, availableWalls: availableWalls, player1: player1, player2: player2, round: round, stack: stack};
 	});
 var $author$project$Game$NewActionPhase = {$: 'NewActionPhase'};
 var $author$project$Game$Available = {$: 'Available'};
@@ -5302,7 +5302,7 @@ var $author$project$Tiles$tileFoodCorner = A8(
 				$elm$core$Basics$lt,
 				3),
 			$author$project$Resources$topFood(3),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -5362,7 +5362,7 @@ var $author$project$Tiles$tileMacina = A8(
 					3,
 					A2($author$project$Resources$addEmmer, -1, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -5380,7 +5380,7 @@ var $author$project$Tiles$tileMacina = A8(
 					7,
 					A2($author$project$Resources$addEmmer, -4, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1]))
 		]));
@@ -5460,7 +5460,7 @@ var $author$project$Tiles$tileSalotto = A8(
 									1,
 									A2($author$project$Resources$topWood, 1, res))))));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -5515,7 +5515,7 @@ var $author$project$Tiles$tileShelf = A8(
 				$elm$core$Basics$lt,
 				2),
 			$author$project$Resources$topWood(2),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3])),
 			A4(
@@ -5528,7 +5528,7 @@ var $author$project$Tiles$tileShelf = A8(
 				$elm$core$Basics$lt,
 				2),
 			$author$project$Resources$topStone(2),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3])),
 			A4(
@@ -5541,7 +5541,7 @@ var $author$project$Tiles$tileShelf = A8(
 				$elm$core$Basics$lt,
 				2),
 			$author$project$Resources$topEmmer(2),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3])),
 			A4(
@@ -5554,7 +5554,7 @@ var $author$project$Tiles$tileShelf = A8(
 				$elm$core$Basics$lt,
 				2),
 			$author$project$Resources$topFlax(2),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3]))
 		]));
@@ -5600,7 +5600,7 @@ var $author$project$Tiles$tileSpinningWheel = A8(
 					1,
 					A2($author$project$Resources$addFlax, -1, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -5618,7 +5618,7 @@ var $author$project$Tiles$tileSpinningWheel = A8(
 					2,
 					A2($author$project$Resources$addFlax, -3, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1]))
 		]));
@@ -5661,7 +5661,7 @@ var $author$project$Tiles$tileTunnel = A8(
 			$author$project$Tiles$topAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addFood(2),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0])),
 			A4(
@@ -5679,7 +5679,7 @@ var $author$project$Tiles$tileTunnel = A8(
 					3,
 					A2($author$project$Resources$addStone, 1, resources));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[1]))
 		]));
@@ -6007,7 +6007,7 @@ var $author$project$Tiles$tileAltareSacrificale = A8(
 								-1,
 								A2($author$project$Resources$addEmmer, -1, res)))));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -6029,7 +6029,7 @@ var $author$project$Tiles$tileArredare = A8(
 			$author$project$Tiles$topAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addFood(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0])),
 			A4(
@@ -6040,7 +6040,8 @@ var $author$project$Tiles$tileArredare = A8(
 			function (r) {
 				return A2($author$project$Resources$addFood, r.actions, r);
 			},
-			$elm$core$Maybe$Just($author$project$Game$Furnish),
+			_List_fromArray(
+				[$author$project$Game$Furnish]),
 			_List_fromArray(
 				[1]))
 		]));
@@ -6073,7 +6074,7 @@ var $author$project$Tiles$tileBancarella = A8(
 					4,
 					A2($author$project$Resources$addEmmer, -5, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -6091,7 +6092,7 @@ var $author$project$Tiles$tileBancarella = A8(
 					4,
 					A2($author$project$Resources$addFlax, -5, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1]))
 		]));
@@ -6115,7 +6116,7 @@ var $author$project$Tiles$tileCameraSegreta = A8(
 			function (res) {
 				return A2($author$project$Resources$addFlax, 3, res);
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -6124,7 +6125,7 @@ var $author$project$Tiles$tileCameraSegreta = A8(
 			function (res) {
 				return A2($author$project$Resources$addGold, 1, res);
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1]))
 		]));
@@ -6154,13 +6155,11 @@ var $author$project$Tiles$tileCavaInEspansione = A8(
 			function (res) {
 				return res;
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
-var $author$project$Game$Activate1 = function (a) {
-	return {$: 'Activate1', a: a};
-};
+var $author$project$Game$Activate = {$: 'Activate'};
 var $author$project$Tiles$tileColtivare = A8(
 	$author$project$Game$Tile,
 	'Coltivare',
@@ -6178,8 +6177,8 @@ var $author$project$Tiles$tileColtivare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just(
-				$author$project$Game$Activate1(true)),
+			_List_fromArray(
+				[$author$project$Game$Activate]),
 			_List_fromArray(
 				[0])),
 			A4(
@@ -6191,7 +6190,7 @@ var $author$project$Tiles$tileColtivare = A8(
 					1,
 					A2($author$project$Resources$addEmmer, 2, r));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[1]))
 		]));
@@ -6217,22 +6216,22 @@ var $author$project$Tiles$tileCostruireUnMuro = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just(
-				$author$project$Game$Activate1(true)),
+			_List_fromArray(
+				[$author$project$Game$Activate]),
 			_List_fromArray(
 				[0])),
 			A4(
 			$author$project$Tiles$thirdAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addWood(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[1, 2])),
 			A4(
 			$author$project$Tiles$fourthAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addStone(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[1, 2])),
 			A4(
@@ -6247,7 +6246,8 @@ var $author$project$Tiles$tileCostruireUnMuro = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just($author$project$Game$BuildWall),
+			_List_fromArray(
+				[$author$project$Game$BuildWall]),
 			_List_fromArray(
 				[3]))
 		]));
@@ -6275,7 +6275,8 @@ var $author$project$Tiles$tileDemolireUnMuro = A8(
 						3,
 						A2($author$project$Resources$addStone, 2, r)));
 			},
-			$elm$core$Maybe$Just($author$project$Game$DestroyWall),
+			_List_fromArray(
+				[$author$project$Game$DestroyWall]),
 			_List_fromArray(
 				[0]))
 		]));
@@ -6305,7 +6306,7 @@ var $author$project$Tiles$tileDeposito = A8(
 						1,
 						A2($author$project$Resources$addEmmer, 1, res)));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -6333,7 +6334,7 @@ var $author$project$Tiles$tileEquipmentRoom = A8(
 	A2($author$project$Resources$priceWood, 2, $author$project$Resources$priceFree),
 	A4($author$project$Game$Walls, $author$project$Game$Placed, $author$project$Game$None, $author$project$Game$None, $author$project$Game$Optional),
 	_List_Nil);
-var $author$project$Game$Excavate1 = {$: 'Excavate1'};
+var $author$project$Game$Excavate = {$: 'Excavate'};
 var $author$project$Tiles$bottomLeftAction = F4(
 	function (isDoable, _do, subphase, disableActions) {
 		return A6($author$project$Game$Action, 'bottomleft', true, isDoable, _do, subphase, disableActions);
@@ -6359,7 +6360,8 @@ var $author$project$Tiles$tileEspansione = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just($author$project$Game$Excavate1),
+			_List_fromArray(
+				[$author$project$Game$Excavate]),
 			_List_fromArray(
 				[0])),
 			A4(
@@ -6372,7 +6374,8 @@ var $author$project$Tiles$tileEspansione = A8(
 				$elm$core$Basics$ge,
 				5),
 			$author$project$Resources$addFood(-5),
-			$elm$core$Maybe$Just($author$project$Game$Furnish),
+			_List_fromArray(
+				[$author$project$Game$Furnish]),
 			_List_fromArray(
 				[1, 2])),
 			A4(
@@ -6385,7 +6388,8 @@ var $author$project$Tiles$tileEspansione = A8(
 				$elm$core$Basics$ge,
 				1),
 			$author$project$Resources$addGold(-1),
-			$elm$core$Maybe$Just($author$project$Game$Furnish),
+			_List_fromArray(
+				[$author$project$Game$Furnish]),
 			_List_fromArray(
 				[1, 2]))
 		]));
@@ -6418,7 +6422,7 @@ var $author$project$Tiles$tileFiliera = A8(
 						2,
 						A2($author$project$Resources$addFlax, -2, res)));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -6454,7 +6458,7 @@ var $author$project$Tiles$tileForno = A8(
 						4,
 						A2($author$project$Resources$addEmmer, -2, res)));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -6475,7 +6479,7 @@ var $author$project$Tiles$tileForno = A8(
 						4,
 						A2($author$project$Resources$addEmmer, -3, res)));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1]))
 		]));
@@ -6499,7 +6503,7 @@ var $author$project$Tiles$tileGoldMine = A8(
 					1,
 					A2($author$project$Resources$addGold, 1, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -6522,7 +6526,8 @@ var $author$project$Tiles$tileLavoriDomestici = A8(
 			function (r) {
 				return A2($author$project$Resources$addFood, -r.actions, r);
 			},
-			$elm$core$Maybe$Just($author$project$Game$Furnish),
+			_List_fromArray(
+				[$author$project$Game$Furnish]),
 			_List_fromArray(
 				[0])),
 			A4(
@@ -6535,7 +6540,8 @@ var $author$project$Tiles$tileLavoriDomestici = A8(
 				$elm$core$Basics$ge,
 				5),
 			$author$project$Resources$addFood(-5),
-			$elm$core$Maybe$Just($author$project$Game$Furnish),
+			_List_fromArray(
+				[$author$project$Game$Furnish]),
 			_List_fromArray(
 				[1, 2])),
 			A4(
@@ -6548,7 +6554,8 @@ var $author$project$Tiles$tileLavoriDomestici = A8(
 				$elm$core$Basics$ge,
 				1),
 			$author$project$Resources$addGold(-1),
-			$elm$core$Maybe$Just($author$project$Game$Furnish),
+			_List_fromArray(
+				[$author$project$Game$Furnish]),
 			_List_fromArray(
 				[1, 2]))
 		]));
@@ -6572,13 +6579,10 @@ var $author$project$Tiles$tileLuxuryRoom = A8(
 					1,
 					A2($author$project$Resources$addGold, 1, res));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
-var $author$project$Game$Activate2 = function (a) {
-	return {$: 'Activate2', a: a};
-};
 var $author$project$Game$ExcavateThroughWall = {$: 'ExcavateThroughWall'};
 var $author$project$Tiles$tileMinare = A8(
 	$author$project$Game$Tile,
@@ -6597,8 +6601,8 @@ var $author$project$Tiles$tileMinare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just(
-				$author$project$Game$Activate2(true)),
+			_List_fromArray(
+				[$author$project$Game$Activate, $author$project$Game$Activate]),
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -6607,7 +6611,8 @@ var $author$project$Tiles$tileMinare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just($author$project$Game$ExcavateThroughWall),
+			_List_fromArray(
+				[$author$project$Game$ExcavateThroughWall]),
 			_List_fromArray(
 				[0, 1]))
 		]));
@@ -6653,7 +6658,7 @@ var $author$project$Tiles$tileOfficina = A8(
 						-1,
 						A2($author$project$Resources$addWood, -2, res)));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -6674,8 +6679,8 @@ var $author$project$Tiles$tilePerforare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just(
-				$author$project$Game$Activate1(true)),
+			_List_fromArray(
+				[$author$project$Game$Activate]),
 			_List_fromArray(
 				[0])),
 			A4(
@@ -6693,7 +6698,8 @@ var $author$project$Tiles$tilePerforare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just($author$project$Game$Excavate1),
+			_List_fromArray(
+				[$author$project$Game$Excavate]),
 			_List_fromArray(
 				[1]))
 		]));
@@ -6726,7 +6732,7 @@ var $author$project$Tiles$tileProspectingSite = A8(
 					1,
 					A2($author$project$Resources$addFood, -1, r));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -6763,7 +6769,8 @@ var $author$project$Tiles$tileRinnovare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just($author$project$Game$BuildWall),
+			_List_fromArray(
+				[$author$project$Game$BuildWall]),
 			_List_fromArray(
 				[0])),
 			A4(
@@ -6772,11 +6779,11 @@ var $author$project$Tiles$tileRinnovare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just($author$project$Game$Furnish),
+			_List_fromArray(
+				[$author$project$Game$Furnish]),
 			_List_fromArray(
 				[1]))
 		]));
-var $author$project$Game$Excavate2 = {$: 'Excavate2'};
 var $author$project$Tiles$topRightAction = F4(
 	function (isDoable, _do, subphase, disableActions) {
 		return A6($author$project$Game$Action, 'topright', true, isDoable, _do, subphase, disableActions);
@@ -6798,7 +6805,8 @@ var $author$project$Tiles$tileScavare = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just($author$project$Game$Excavate1),
+			_List_fromArray(
+				[$author$project$Game$Excavate]),
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -6811,14 +6819,15 @@ var $author$project$Tiles$tileScavare = A8(
 				$elm$core$Basics$ge,
 				2),
 			$author$project$Resources$addFood(-2),
-			$elm$core$Maybe$Just($author$project$Game$Excavate2),
+			_List_fromArray(
+				[$author$project$Game$Excavate, $author$project$Game$Excavate]),
 			_List_fromArray(
 				[0, 1])),
 			A4(
 			$author$project$Tiles$bottomAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addStone(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[2]))
 		]));
@@ -6839,21 +6848,18 @@ var $author$project$Tiles$tileSottobosco = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just(
-				$author$project$Game$Activate1(true)),
+			_List_fromArray(
+				[$author$project$Game$Activate]),
 			_List_fromArray(
 				[0])),
 			A4(
 			$author$project$Tiles$bottomAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addWood(2),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[1]))
 		]));
-var $author$project$Game$Activate3 = function (a) {
-	return {$: 'Activate3', a: a};
-};
 var $author$project$Tiles$tileSpedizione = A8(
 	$author$project$Game$Tile,
 	'Spedizione',
@@ -6880,7 +6886,7 @@ var $author$project$Tiles$tileSpedizione = A8(
 					5,
 					A2($author$project$Resources$addWood, -5, r));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2])),
 			A4(
@@ -6898,7 +6904,7 @@ var $author$project$Tiles$tileSpedizione = A8(
 					5,
 					A2($author$project$Resources$addStone, -5, r));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2])),
 			A4(
@@ -6907,12 +6913,12 @@ var $author$project$Tiles$tileSpedizione = A8(
 			function (r) {
 				return r;
 			},
-			$elm$core$Maybe$Just(
-				$author$project$Game$Activate3(true)),
+			_List_fromArray(
+				[$author$project$Game$Activate, $author$project$Game$Activate, $author$project$Game$Activate]),
 			_List_fromArray(
 				[0, 1, 2]))
 		]));
-var $author$project$Game$ChooseResource3 = {$: 'ChooseResource3'};
+var $author$project$Game$ChooseResource = {$: 'ChooseResource'};
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -6951,7 +6957,8 @@ var $author$project$Tiles$tileStanzaDiSnodo = A8(
 			function (res) {
 				return A2($author$project$Resources$addGold, 2, res);
 			},
-			$elm$core$Maybe$Just($author$project$Game$ChooseResource3),
+			_List_fromArray(
+				[$author$project$Game$ChooseResource, $author$project$Game$ChooseResource, $author$project$Game$ChooseResource]),
 			_List_fromArray(
 				[0]))
 		]));
@@ -6984,7 +6991,7 @@ var $author$project$Tiles$tileTesoreria = A8(
 						4,
 						A2($author$project$Resources$addGold, -3, res)));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -7023,7 +7030,7 @@ var $author$project$Tiles$tileWarehouse = A8(
 								1,
 								A2($author$project$Resources$addFood, -2, res)))));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
@@ -7049,9 +7056,9 @@ var $author$project$Tiles$initRandomTiles = A5(
 		[$author$project$Tiles$tileDemolireUnMuro, $author$project$Tiles$tileEspansione, $author$project$Tiles$tileSpedizione, $author$project$Tiles$tilePerforare]),
 	_List_fromArray(
 		[$author$project$Tiles$tileRinnovare]));
-var $author$project$Game$PlayerBoard = F5(
-	function (resources, freeAction, rooms, walls, actionTiles) {
-		return {actionTiles: actionTiles, freeAction: freeAction, resources: resources, rooms: rooms, walls: walls};
+var $author$project$Game$PlayerBoard = F6(
+	function (resources, freeAction, rooms, walls, actionTiles, active) {
+		return {actionTiles: actionTiles, active: active, freeAction: freeAction, resources: resources, rooms: rooms, walls: walls};
 	});
 var $elm$core$Array$repeat = F2(
 	function (n, e) {
@@ -7089,7 +7096,7 @@ var $author$project$Tiles$tileFreeAction = A8(
 					-1,
 					A2($author$project$Resources$addFood, 1, r));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_Nil),
 			A4(
 			$author$project$Tiles$secondAction,
@@ -7106,7 +7113,7 @@ var $author$project$Tiles$tileFreeAction = A8(
 					-1,
 					A2($author$project$Resources$addFood, 1, r));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_Nil),
 			A4(
 			$author$project$Tiles$thirdAction,
@@ -7123,25 +7130,27 @@ var $author$project$Tiles$tileFreeAction = A8(
 					-1,
 					A2($author$project$Resources$addFood, 1, r));
 			},
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_Nil)
 		]));
-var $author$project$PlayerBoard$newBoard = A5(
-	$author$project$Game$PlayerBoard,
-	A9($author$project$Game$Resources, 1, 1, 1, 1, 1, 1, 1, 7, 0),
-	$author$project$Tiles$tileFreeAction,
-	_List_Nil,
-	A2($elm$core$Array$repeat, 14, $author$project$Game$None),
-	_List_Nil);
+var $author$project$PlayerBoard$newBoard = function (active) {
+	return A6(
+		$author$project$Game$PlayerBoard,
+		A9($author$project$Game$Resources, 1, 1, 1, 1, 1, 1, 1, 7, 0),
+		$author$project$Tiles$tileFreeAction,
+		_List_Nil,
+		A2($elm$core$Array$repeat, 14, $author$project$Game$None),
+		_List_Nil,
+		active);
+};
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		A9(
+		A8(
 			$author$project$Game$Game,
-			$author$project$PlayerBoard$newBoard,
-			$author$project$PlayerBoard$newBoard,
+			$author$project$PlayerBoard$newBoard(true),
+			$author$project$PlayerBoard$newBoard(false),
 			1,
 			2,
-			1,
 			_List_Nil,
 			$author$project$Tiles$initCommonRooms,
 			7,
@@ -7153,6 +7162,9 @@ var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Game$AddToAvailableRooms = function (a) {
 	return {$: 'AddToAvailableRooms', a: a};
+};
+var $author$project$Game$PlaceRoom = function (a) {
+	return {$: 'PlaceRoom', a: a};
 };
 var $author$project$Game$RemoveFromAvailableRooms = function (a) {
 	return {$: 'RemoveFromAvailableRooms', a: a};
@@ -7217,42 +7229,30 @@ var $author$project$PlayerBoard$applyDungeon = function (player) {
 };
 var $author$project$PlayerBoard$applyEquipmentRoom = F2(
 	function (subphase, player) {
-		if (A2($author$project$PlayerBoard$playerHasEquipment, player, $author$project$Tiles$tileEquipmentRoom)) {
-			switch (subphase.$) {
-				case 'Activate2':
-					var first = subphase.a;
-					return first ? $elm$core$Maybe$Just(
-						$author$project$Game$Activate2(false)) : $elm$core$Maybe$Just(
-						$author$project$Game$Activate1(false));
-				case 'Activate3':
-					var first = subphase.a;
-					return first ? $elm$core$Maybe$Just(
-						$author$project$Game$Activate3(false)) : $elm$core$Maybe$Just(
-						$author$project$Game$Activate2(false));
-				default:
-					return $elm$core$Maybe$Nothing;
-			}
-		} else {
-			switch (subphase.$) {
-				case 'Activate2':
-					var first = subphase.a;
-					return $elm$core$Maybe$Just(
-						$author$project$Game$Activate1(false));
-				case 'Activate3':
-					var first = subphase.a;
-					return $elm$core$Maybe$Just(
-						$author$project$Game$Activate2(false));
-				default:
-					return $elm$core$Maybe$Nothing;
-			}
-		}
+		var activateCount = $elm$core$List$length(
+			A2(
+				$elm$core$List$filter,
+				$elm$core$Basics$eq($author$project$Game$Activate),
+				subphase));
+		return (((activateCount === 2) || (activateCount === 3)) && A2($author$project$PlayerBoard$playerHasEquipment, player, $author$project$Tiles$tileEquipmentRoom)) ? A2($elm$core$List$cons, $author$project$Game$Activate, subphase) : subphase;
 	});
-var $author$project$PlayerBoard$applyWoodStoreroom = F3(
-	function (first, qty, player) {
-		return (first && A2($author$project$PlayerBoard$playerHasEquipment, player, $author$project$Tiles$tileWoodStoreroom)) ? _Utils_update(
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$PlayerBoard$applyWoodStoreroom = F2(
+	function (phases, player) {
+		return (($elm$core$List$length(phases) === 1) && (_Utils_eq(
+			$elm$core$List$head(phases),
+			$elm$core$Maybe$Just($author$project$Game$Activate)) && A2($author$project$PlayerBoard$playerHasEquipment, player, $author$project$Tiles$tileWoodStoreroom))) ? _Utils_update(
 			player,
 			{
-				resources: A2($author$project$Resources$addFood, qty, player.resources)
+				resources: A2($author$project$Resources$addFood, 1, player.resources)
 			}) : player;
 	});
 var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
@@ -7612,15 +7612,6 @@ var $elm$core$List$drop = F2(
 			}
 		}
 	});
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
 var $elm$core$Tuple$pair = F2(
 	function (a, b) {
 		return _Utils_Tuple2(a, b);
@@ -7666,7 +7657,7 @@ var $author$project$PlayerBoard$escavateRoom = F2(
 			});
 	});
 var $author$project$Main$getCurrentPlayer = function (game) {
-	return (game.currentPlayer === 1) ? game.player1 : game.player2;
+	return game.player1.active ? game.player1 : game.player2;
 };
 var $elm$core$List$takeReverse = F3(
 	function (n, list, kept) {
@@ -7809,28 +7800,28 @@ var $author$project$Tiles$tileCaveEntrance = A8(
 			$author$project$Tiles$firstAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addWood(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3])),
 			A4(
 			$author$project$Tiles$secondAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addStone(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3])),
 			A4(
 			$author$project$Tiles$thirdAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addEmmer(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3])),
 			A4(
 			$author$project$Tiles$fourthAction,
 			$author$project$Resources$alwaysDoable,
 			$author$project$Resources$addFlax(1),
-			$elm$core$Maybe$Nothing,
+			_List_Nil,
 			_List_fromArray(
 				[0, 1, 2, 3]))
 		]));
@@ -7862,7 +7853,7 @@ var $author$project$PlayerBoard$init = function (rooms) {
 };
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$opponentPlayer = function (game) {
-	return (game.currentPlayer === 1) ? game.player2 : game.player1;
+	return game.player1.active ? game.player2 : game.player1;
 };
 var $author$project$PlayerBoard$restoreTile = function (room) {
 	return _Utils_eq(room.status, $author$project$Game$Active) ? _Utils_update(
@@ -7881,7 +7872,7 @@ var $author$project$PlayerBoard$restoreTile = function (room) {
 };
 var $author$project$Main$setCurrentPlayer = F2(
 	function (player, game) {
-		return (game.currentPlayer === 1) ? _Utils_update(
+		return game.player1.active ? _Utils_update(
 			game,
 			{player1: player}) : _Utils_update(
 			game,
@@ -7915,11 +7906,19 @@ var $author$project$Main$activatePlayer = function (game) {
 			}),
 		game);
 };
+var $elm$core$Basics$not = _Basics_not;
 var $author$project$Main$nextPlayer = function (game) {
+	var player1 = game.player1;
+	var player2 = game.player2;
 	return _Utils_update(
 		game,
 		{
-			currentPlayer: (game.currentPlayer === 1) ? 2 : 1,
+			player1: _Utils_update(
+				player1,
+				{active: !player1.active}),
+			player2: _Utils_update(
+				player2,
+				{active: !player2.active}),
 			stack: _List_fromArray(
 				[$author$project$Game$NewActionPhase])
 		});
@@ -8059,18 +8058,17 @@ var $author$project$Main$popFromPhase = function (game) {
 			stack: $author$project$Stack$pop(game.stack)
 		});
 };
+var $author$project$Stack$pushAll = F2(
+	function (list, stack) {
+		return _Utils_ap(list, stack);
+	});
 var $author$project$Main$pushToPhase = F2(
-	function (sub, game) {
-		if (sub.$ === 'Just') {
-			var subphase = sub.a;
-			return _Utils_update(
-				game,
-				{
-					stack: A2($author$project$Stack$push, subphase, game.stack)
-				});
-		} else {
-			return game;
-		}
+	function (subphase, game) {
+		return _Utils_update(
+			game,
+			{
+				stack: A2($author$project$Stack$pushAll, subphase, game.stack)
+			});
 	});
 var $author$project$Main$removeFromAvailableRooms = F2(
 	function (tile, game) {
@@ -8214,15 +8212,21 @@ var $author$project$Main$update = F2(
 						$elm$core$Platform$Cmd$none,
 						A2(
 							$author$project$Main$pushToPhase,
-							action.subphase,
+							A2(
+								$author$project$PlayerBoard$applyEquipmentRoom,
+								action.subphase,
+								$author$project$Main$getCurrentPlayer(game)),
 							A2(
 								$author$project$Main$setCurrentPlayer2,
 								game,
-								A3(
-									$author$project$PlayerBoard$doAction,
-									tile,
-									action,
-									$author$project$Main$getCurrentPlayer(game))))));
+								A2(
+									$author$project$PlayerBoard$applyWoodStoreroom,
+									action.subphase,
+									A3(
+										$author$project$PlayerBoard$doAction,
+										tile,
+										action,
+										$author$project$Main$getCurrentPlayer(game)))))));
 			case 'SelectWall':
 				var index = msg.a;
 				var _v1 = $author$project$Stack$top(game.stack);
@@ -8259,15 +8263,23 @@ var $author$project$Main$update = F2(
 			case 'SelectRoomTile':
 				var tile = msg.a;
 				var _v4 = $author$project$Stack$top(game.stack);
-				_v4$8:
+				_v4$5:
 				while (true) {
 					if (_v4.$ === 'Just') {
 						switch (_v4.a.$) {
 							case 'Furnish':
 								var _v5 = _v4.a;
-								return _Utils_Tuple2(
-									A2($author$project$Main$setCurrentPlayer, activePlayer, game),
-									$elm$core$Platform$Cmd$none);
+								return $author$project$Main$swap(
+									A2(
+										$elm$core$Tuple$pair,
+										$elm$core$Platform$Cmd$none,
+										A2(
+											$author$project$Main$pushToPhase,
+											_List_fromArray(
+												[
+													$author$project$Game$PlaceRoom(tile)
+												]),
+											$author$project$Main$popFromPhase(game))));
 							case 'PlaceRoom':
 								var tileToPlace = _v4.a.a;
 								return A2(
@@ -8288,7 +8300,7 @@ var $author$project$Main$update = F2(
 											$author$project$Main$setCurrentPlayer2,
 											game,
 											A2($author$project$PlayerBoard$escavateRoom, tile, activePlayer))));
-							case 'Excavate1':
+							case 'Excavate':
 								var _v7 = _v4.a;
 								return A2(
 									$author$project$Main$update,
@@ -8298,21 +8310,8 @@ var $author$project$Main$update = F2(
 											$author$project$Main$setCurrentPlayer2,
 											game,
 											A2($author$project$PlayerBoard$escavateRoom, tile, activePlayer))));
-							case 'Excavate2':
+							case 'Activate':
 								var _v8 = _v4.a;
-								return A2(
-									$author$project$Main$update,
-									$author$project$Game$AddToAvailableRooms(tile),
-									A2(
-										$author$project$Main$pushToPhase,
-										$elm$core$Maybe$Just($author$project$Game$Excavate1),
-										$author$project$Main$popFromPhase(
-											A2(
-												$author$project$Main$setCurrentPlayer2,
-												game,
-												A2($author$project$PlayerBoard$escavateRoom, tile, activePlayer)))));
-							case 'Activate1':
-								var first = _v4.a.a;
 								return $author$project$Main$swap(
 									A2(
 										$elm$core$Tuple$pair,
@@ -8321,70 +8320,29 @@ var $author$project$Main$update = F2(
 											A2(
 												$author$project$Main$setCurrentPlayer2,
 												game,
-												A2(
-													$author$project$PlayerBoard$activateRoom,
-													tile,
-													A3($author$project$PlayerBoard$applyWoodStoreroom, first, 1, activePlayer))))));
-							case 'Activate2':
-								var first = _v4.a.a;
-								return $author$project$Main$swap(
-									A2(
-										$elm$core$Tuple$pair,
-										$elm$core$Platform$Cmd$none,
-										A2(
-											$author$project$Main$pushToPhase,
-											A2(
-												$author$project$PlayerBoard$applyEquipmentRoom,
-												$author$project$Game$Activate2(first),
-												activePlayer),
-											$author$project$Main$popFromPhase(
-												A2(
-													$author$project$Main$setCurrentPlayer2,
-													game,
-													A2($author$project$PlayerBoard$activateRoom, tile, activePlayer))))));
-							case 'Activate3':
-								var first = _v4.a.a;
-								return $author$project$Main$swap(
-									A2(
-										$elm$core$Tuple$pair,
-										$elm$core$Platform$Cmd$none,
-										A2(
-											$author$project$Main$pushToPhase,
-											A2(
-												$author$project$PlayerBoard$applyEquipmentRoom,
-												$author$project$Game$Activate3(first),
-												activePlayer),
-											$author$project$Main$popFromPhase(
-												A2(
-													$author$project$Main$setCurrentPlayer2,
-													game,
-													A2($author$project$PlayerBoard$activateRoom, tile, activePlayer))))));
+												A2($author$project$PlayerBoard$activateRoom, tile, activePlayer)))));
 							default:
-								break _v4$8;
+								break _v4$5;
 						}
 					} else {
-						break _v4$8;
+						break _v4$5;
 					}
 				}
 				return _Utils_Tuple2(game, $elm$core$Platform$Cmd$none);
 			default:
-				var maybeSubphase = msg.a;
-				var updateResources = msg.b;
+				var updateResources = msg.a;
 				return $author$project$Main$swap(
 					A2(
 						$elm$core$Tuple$pair,
 						$elm$core$Platform$Cmd$none,
-						A2(
-							$author$project$Main$pushToPhase,
-							maybeSubphase,
-							$author$project$Main$popFromPhase(
+						$author$project$Main$popFromPhase(
+							A2(
+								$author$project$Main$setCurrentPlayer2,
+								game,
 								A2(
-									$author$project$Main$setCurrentPlayer2,
-									game,
-									A2(
-										$author$project$PlayerBoard$chooseResource,
-										updateResources,
-										$author$project$Main$getCurrentPlayer(game)))))));
+									$author$project$PlayerBoard$chooseResource,
+									updateResources,
+									$author$project$Main$getCurrentPlayer(game))))));
 		}
 	});
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -8712,79 +8670,48 @@ var $author$project$PlayerBoard$viewFreeAction = function (board) {
 		board.resources,
 		board.freeAction);
 };
-var $author$project$Game$ChooseResource1 = {$: 'ChooseResource1'};
-var $author$project$Game$ChooseResource2 = {$: 'ChooseResource2'};
-var $author$project$Game$ResourceChosen = F2(
-	function (a, b) {
-		return {$: 'ResourceChosen', a: a, b: b};
-	});
+var $author$project$Game$ResourceChosen = function (a) {
+	return {$: 'ResourceChosen', a: a};
+};
 var $elm$core$Debug$toString = _Debug_toString;
-var $author$project$PlayerBoard$viewResource = F4(
-	function (resource, qty, subphase, resfun) {
-		_v0$3:
-		while (true) {
-			if (subphase.$ === 'Just') {
-				switch (subphase.a.$) {
-					case 'ChooseResource3':
-						var _v1 = subphase.a;
-						return A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class(
-									resource + (' ' + ('qty' + $elm$core$Debug$toString(qty)))),
-									$elm$html$Html$Events$onClick(
-									A2(
-										$author$project$Game$ResourceChosen,
-										$elm$core$Maybe$Just($author$project$Game$ChooseResource2),
-										resfun))
-								]),
-							_List_Nil);
-					case 'ChooseResource2':
-						var _v2 = subphase.a;
-						return A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class(
-									resource + (' ' + ('qty' + $elm$core$Debug$toString(qty)))),
-									$elm$html$Html$Events$onClick(
-									A2(
-										$author$project$Game$ResourceChosen,
-										$elm$core$Maybe$Just($author$project$Game$ChooseResource1),
-										resfun))
-								]),
-							_List_Nil);
-					case 'ChooseResource1':
-						var _v3 = subphase.a;
-						return A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class(
-									resource + (' ' + ('qty' + $elm$core$Debug$toString(qty)))),
-									$elm$html$Html$Events$onClick(
-									A2($author$project$Game$ResourceChosen, $elm$core$Maybe$Nothing, resfun))
-								]),
-							_List_Nil);
-					default:
-						break _v0$3;
-				}
+var $author$project$PlayerBoard$viewResource = F5(
+	function (active, resource, qty, subphase, resfun) {
+		if (active) {
+			if ((subphase.$ === 'Just') && (subphase.a.$ === 'ChooseResource')) {
+				var _v1 = subphase.a;
+				return A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class(
+							resource + (' ' + ('qty' + $elm$core$Debug$toString(qty)))),
+							$elm$html$Html$Events$onClick(
+							$author$project$Game$ResourceChosen(resfun))
+						]),
+					_List_Nil);
 			} else {
-				break _v0$3;
+				return A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class(
+							resource + (' ' + ('qty' + $elm$core$Debug$toString(qty))))
+						]),
+					_List_Nil);
 			}
+		} else {
+			return A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class(
+						resource + (' ' + ('qty' + $elm$core$Debug$toString(qty))))
+					]),
+				_List_Nil);
 		}
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(
-					resource + (' ' + ('qty' + $elm$core$Debug$toString(qty))))
-				]),
-			_List_Nil);
 	});
 var $author$project$PlayerBoard$viewResources = F2(
-	function (resources, subphase) {
+	function (board, subphase) {
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
@@ -8793,60 +8720,66 @@ var $author$project$PlayerBoard$viewResources = F2(
 				]),
 			_List_fromArray(
 				[
-					A4(
+					A5(
 					$author$project$PlayerBoard$viewResource,
+					board.active,
 					'food',
-					resources.food,
+					board.resources.food,
 					subphase,
 					function (r) {
 						return _Utils_update(
 							r,
 							{food: r.food - 1});
 					}),
-					A4(
+					A5(
 					$author$project$PlayerBoard$viewResource,
+					board.active,
 					'wood',
-					resources.wood,
+					board.resources.wood,
 					subphase,
 					function (r) {
 						return _Utils_update(
 							r,
 							{wood: r.wood - 1});
 					}),
-					A4(
+					A5(
 					$author$project$PlayerBoard$viewResource,
+					board.active,
 					'stone',
-					resources.stone,
+					board.resources.stone,
 					subphase,
 					function (r) {
 						return _Utils_update(
 							r,
 							{stone: r.stone - 1});
 					}),
-					A4(
+					A5(
 					$author$project$PlayerBoard$viewResource,
+					board.active,
 					'emmer',
-					resources.emmer,
+					board.resources.emmer,
 					subphase,
 					function (r) {
 						return _Utils_update(
 							r,
 							{emmer: r.emmer - 1});
 					}),
-					A4(
+					A5(
 					$author$project$PlayerBoard$viewResource,
+					board.active,
 					'flax',
-					resources.flax,
+					board.resources.flax,
 					subphase,
 					function (r) {
 						return _Utils_update(
 							r,
 							{flax: r.flax - 1});
 					}),
-					A4(
+					A5(
 					$author$project$PlayerBoard$viewResource,
+					board.active,
 					'gold',
-					resources.gold,
+					board.resources.gold,
 					subphase,
 					function (r) {
 						return _Utils_update(
@@ -8985,45 +8918,40 @@ var $author$project$PlayerBoard$viewSelectableTile = F3(
 	});
 var $author$project$PlayerBoard$viewRoom = F4(
 	function (board, subphase, index, tile) {
-		_v0$7:
-		while (true) {
-			if (subphase.$ === 'Just') {
-				switch (subphase.a.$) {
-					case 'ExcavateThroughWall':
-						var _v1 = subphase.a;
-						return (_Utils_eq(tile.status, $author$project$Game$Rock) && A2($author$project$PlayerBoard$isExcavatable, board, tile)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
-					case 'Excavate1':
-						var _v2 = subphase.a;
-						return (_Utils_eq(tile.status, $author$project$Game$Rock) && A2($author$project$PlayerBoard$isExcavatable, board, tile)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
-					case 'Excavate2':
-						var _v3 = subphase.a;
-						return _Utils_eq(tile.status, $author$project$Game$Rock) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
-					case 'PlaceRoom':
-						var t = subphase.a.a;
-						return (A2(
-							$elm$core$Debug$log,
-							'(tile.status == Empty)',
-							_Utils_eq(tile.status, $author$project$Game$Empty)) && A2(
-							$author$project$Walls$matches,
-							A2($elm$core$Debug$log, '(t.walls)', t.walls),
-							A2($elm$core$Debug$log, '(tile.walls)', tile.walls))) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
-					case 'Activate1':
-						var first = subphase.a.a;
-						return _Utils_eq(tile.status, $author$project$Game$Available) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
-					case 'Activate2':
-						var first = subphase.a.a;
-						return _Utils_eq(tile.status, $author$project$Game$Available) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
-					case 'Activate3':
-						var first = subphase.a.a;
-						return _Utils_eq(tile.status, $author$project$Game$Available) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
-					default:
-						break _v0$7;
+		if (!board.active) {
+			return A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
+		} else {
+			_v0$4:
+			while (true) {
+				if (subphase.$ === 'Just') {
+					switch (subphase.a.$) {
+						case 'ExcavateThroughWall':
+							var _v1 = subphase.a;
+							return (_Utils_eq(tile.status, $author$project$Game$Rock) && A2($author$project$PlayerBoard$isExcavatable, board, tile)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
+						case 'Excavate':
+							var _v2 = subphase.a;
+							return (_Utils_eq(tile.status, $author$project$Game$Rock) && A2($author$project$PlayerBoard$isExcavatable, board, tile)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
+						case 'PlaceRoom':
+							var t = subphase.a.a;
+							return (A2(
+								$elm$core$Debug$log,
+								'(tile.status == Empty)',
+								_Utils_eq(tile.status, $author$project$Game$Empty)) && A2(
+								$author$project$Walls$matches,
+								A2($elm$core$Debug$log, '(t.walls)', t.walls),
+								A2($elm$core$Debug$log, '(tile.walls)', tile.walls))) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
+						case 'Activate':
+							var _v3 = subphase.a;
+							return _Utils_eq(tile.status, $author$project$Game$Available) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
+						default:
+							break _v0$4;
+					}
+				} else {
+					break _v0$4;
 				}
-			} else {
-				break _v0$7;
 			}
+			return A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 		}
-		return A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 	});
 var $author$project$PlayerBoard$viewRooms = F2(
 	function (board, subphase) {
@@ -9128,11 +9056,13 @@ var $author$project$PlayerBoard$viewWalls = F2(
 	});
 var $author$project$PlayerBoard$viewBoard = F2(
 	function (board, subphase) {
+		var activeClass = board.active ? 'active' : '';
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('playerboard')
+					$elm$html$Html$Attributes$class('playerboard'),
+					$elm$html$Html$Attributes$class(activeClass)
 				]),
 			_List_fromArray(
 				[
@@ -9146,7 +9076,7 @@ var $author$project$PlayerBoard$viewBoard = F2(
 					_Utils_ap(
 						_List_fromArray(
 							[
-								A2($author$project$PlayerBoard$viewResources, board.resources, subphase),
+								A2($author$project$PlayerBoard$viewResources, board, subphase),
 								$author$project$PlayerBoard$viewFreeAction(board)
 							]),
 						_Utils_ap(
@@ -9191,44 +9121,29 @@ var $author$project$Game$subphaseToString = function (subphase) {
 			case 'ActionPhase':
 				var _v2 = subphase.a;
 				return 'Action Phase';
-			case 'Excavate1':
+			case 'Excavate':
 				var _v3 = subphase.a;
 				return 'Escavate 1';
-			case 'Excavate2':
-				var _v4 = subphase.a;
-				return 'Escavate 2';
 			case 'Furnish':
-				var _v5 = subphase.a;
+				var _v4 = subphase.a;
 				return 'Furnish';
 			case 'PlaceRoom':
 				var tile = subphase.a.a;
 				return 'PlaceRoom ' + tile.title;
 			case 'BuildWall':
-				var _v6 = subphase.a;
+				var _v5 = subphase.a;
 				return 'Build a Wall';
 			case 'DestroyWall':
-				var _v7 = subphase.a;
+				var _v6 = subphase.a;
 				return 'Destroy a Wall';
 			case 'ExcavateThroughWall':
-				var _v8 = subphase.a;
+				var _v7 = subphase.a;
 				return 'Escavate through a Wall';
-			case 'Activate1':
-				var first = subphase.a.a;
+			case 'Activate':
+				var _v8 = subphase.a;
 				return 'Activate a Room 1';
-			case 'Activate2':
-				var first = subphase.a.a;
-				return 'Activate a Room 2';
-			case 'Activate3':
-				var first = subphase.a.a;
-				return 'Activate a Room 3';
-			case 'ChooseResource3':
-				var _v9 = subphase.a;
-				return 'Choose Three Resources';
-			case 'ChooseResource2':
-				var _v10 = subphase.a;
-				return 'Choose Two Resources';
 			default:
-				var _v11 = subphase.a;
+				var _v9 = subphase.a;
 				return 'Choose One Resource';
 		}
 	}
@@ -9260,7 +9175,8 @@ var $author$project$Main$viewStatusBar = function (game) {
 				_List_fromArray(
 					[
 						$elm$html$Html$text(
-						'Round: ' + ($elm$core$String$fromInt(game.round) + (' || Player ' + ($elm$core$String$fromInt(game.currentPlayer) + (' || Actions: ' + ($elm$core$String$fromInt(
+						'Round: ' + ($elm$core$String$fromInt(game.round) + (' || Player ' + ($elm$core$String$fromInt(
+							game.player1.active ? 1 : 2) + (' || Actions: ' + ($elm$core$String$fromInt(
 							$elm$core$List$length(
 								$author$project$Main$getCurrentPlayer(game).actionTiles)) + ('/' + ($elm$core$String$fromInt(game.actions) + (' || Phase: ' + ($author$project$Game$subphaseToString(
 							$author$project$Stack$top(game.stack)) + (' || Available Walls: ' + $elm$core$String$fromInt(game.availableWalls))))))))))))
