@@ -6144,7 +6144,9 @@ var $author$project$Tiles$tileLavoriDomestici = A8(
 			_List_fromArray(
 				[1, 2]))
 		]));
-var $author$project$Game$Excavate = {$: 'Excavate'};
+var $author$project$Game$Excavate = function (a) {
+	return {$: 'Excavate', a: a};
+};
 var $author$project$Tiles$topLeftAction = F4(
 	function (isDoable, _do, subphase, disableActions) {
 		return A6($author$project$Game$Action, 'topleft', true, isDoable, _do, subphase, disableActions);
@@ -6171,7 +6173,9 @@ var $author$project$Tiles$tileScavare = A8(
 				return r;
 			},
 			_List_fromArray(
-				[$author$project$Game$Excavate]),
+				[
+					$author$project$Game$Excavate(1)
+				]),
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -6185,7 +6189,10 @@ var $author$project$Tiles$tileScavare = A8(
 				2),
 			$author$project$Resources$addFood(-2),
 			_List_fromArray(
-				[$author$project$Game$Excavate, $author$project$Game$Excavate]),
+				[
+					$author$project$Game$Excavate(2),
+					$author$project$Game$Excavate(2)
+				]),
 			_List_fromArray(
 				[0, 1])),
 			A4(
@@ -6251,7 +6258,7 @@ var $author$project$Tiles$tileArredare = A8(
 				return _Utils_cmp(r.food, r.actions) > 0;
 			},
 			function (r) {
-				return A2($author$project$Resources$addFood, r.actions, r);
+				return A2($author$project$Resources$addFood, -r.actions, r);
 			},
 			_List_fromArray(
 				[$author$project$Game$Furnish]),
@@ -6931,7 +6938,9 @@ var $author$project$Tiles$tileEspansione = A8(
 				return r;
 			},
 			_List_fromArray(
-				[$author$project$Game$Excavate]),
+				[
+					$author$project$Game$Excavate(1)
+				]),
 			_List_fromArray(
 				[0])),
 			A4(
@@ -7000,7 +7009,9 @@ var $author$project$Tiles$tilePerforare = A8(
 				return r;
 			},
 			_List_fromArray(
-				[$author$project$Game$Excavate]),
+				[
+					$author$project$Game$Excavate(1)
+				]),
 			_List_fromArray(
 				[1]))
 		]));
@@ -7169,6 +7180,14 @@ var $author$project$Resources$topGold = F2(
 				gold: A2($elm$core$Basics$max, resources.gold, qty)
 			});
 	});
+var $author$project$Resources$topStone = F2(
+	function (qty, resources) {
+		return _Utils_update(
+			resources,
+			{
+				stone: A2($elm$core$Basics$max, resources.stone, qty)
+			});
+	});
 var $author$project$Resources$topWood = F2(
 	function (qty, resources) {
 		return _Utils_update(
@@ -7210,20 +7229,12 @@ var $author$project$Tiles$tileSalotto = A8(
 								A2(
 									$author$project$Resources$topWood,
 									1,
-									A2($author$project$Resources$topWood, 1, res))))));
+									A2($author$project$Resources$topStone, 1, res))))));
 			},
 			_List_Nil,
 			_List_fromArray(
 				[0]))
 		]));
-var $author$project$Resources$topStone = F2(
-	function (qty, resources) {
-		return _Utils_update(
-			resources,
-			{
-				stone: A2($elm$core$Basics$max, resources.stone, qty)
-			});
-	});
 var $author$project$Tiles$tileShelf = A8(
 	$author$project$Game$Tile,
 	'Shelf',
@@ -7537,7 +7548,7 @@ var $author$project$PlayerBoard$applyWoodStoreroom = F2(
 			$elm$core$Maybe$Just($author$project$Game$Activate)) && A2($author$project$PlayerBoard$playerHasEquipment, player, $author$project$Tiles$tileWoodStoreroom))) ? _Utils_update(
 			player,
 			{
-				resources: A2($author$project$Resources$addFood, 1, player.resources)
+				resources: A2($author$project$Resources$addWood, 1, player.resources)
 			}) : player;
 	});
 var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
@@ -8216,6 +8227,37 @@ var $author$project$PlayerBoard$selectActionTile = F2(
 						]))
 			});
 	});
+var $author$project$Main$soloPlayerUncoverRoom = F2(
+	function (excavateTimes, game) {
+		var player2 = game.player2;
+		var room = $elm$core$List$head(game.player2.rooms);
+		if (excavateTimes === 2) {
+			return game;
+		} else {
+			if (room.$ === 'Just') {
+				var r = room.a;
+				return _Utils_update(
+					game,
+					{
+						availableRooms: _Utils_ap(
+							game.availableRooms,
+							_List_fromArray(
+								[
+									_Utils_update(
+									r,
+									{status: $author$project$Game$Available})
+								])),
+						player2: _Utils_update(
+							player2,
+							{
+								rooms: A2($elm$core$List$drop, 1, player2.rooms)
+							})
+					});
+			} else {
+				return game;
+			}
+		}
+	});
 var $author$project$Main$swap = function (_v0) {
 	var a = _v0.a;
 	var b = _v0.b;
@@ -8448,21 +8490,24 @@ var $author$project$Main$update = F2(
 													game,
 													A2($author$project$PlayerBoard$escavateRoom, tile, activePlayer))))));
 							case 'Excavate':
-								var _v8 = _v5.a;
+								var times = _v5.a.a;
 								return $author$project$Main$swap(
 									A2(
 										$elm$core$Tuple$pair,
 										$elm$core$Platform$Cmd$none,
 										$author$project$Main$popFromPhase(
 											A2(
-												$author$project$Main$addToAvailableRooms,
-												tile,
+												$author$project$Main$soloPlayerUncoverRoom,
+												times,
 												A2(
-													$author$project$Main$setCurrentPlayer,
-													game,
-													A2($author$project$PlayerBoard$escavateRoom, tile, activePlayer))))));
+													$author$project$Main$addToAvailableRooms,
+													tile,
+													A2(
+														$author$project$Main$setCurrentPlayer,
+														game,
+														A2($author$project$PlayerBoard$escavateRoom, tile, activePlayer)))))));
 							case 'Activate':
-								var _v9 = _v5.a;
+								var _v8 = _v5.a;
 								return $author$project$Main$swap(
 									A2(
 										$elm$core$Tuple$pair,
@@ -8473,7 +8518,7 @@ var $author$project$Main$update = F2(
 												game,
 												A2($author$project$PlayerBoard$activateRoom, tile, activePlayer)))));
 							case 'SelectAdditionalCave':
-								var _v10 = _v5.a;
+								var _v9 = _v5.a;
 								return $author$project$Main$swap(
 									A2(
 										$elm$core$Tuple$pair,
@@ -9091,7 +9136,7 @@ var $author$project$PlayerBoard$viewRoom = F4(
 							var _v1 = subphase.a;
 							return (_Utils_eq(tile.status, $author$project$Game$Rock) && A2($author$project$PlayerBoard$isExcavatable, board, tile)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 						case 'Excavate':
-							var _v2 = subphase.a;
+							var times = subphase.a.a;
 							return (_Utils_eq(tile.status, $author$project$Game$Rock) && A2($author$project$PlayerBoard$isExcavatable, board, tile)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 						case 'PlaceRoom':
 							var t = subphase.a.a;
@@ -9103,7 +9148,7 @@ var $author$project$PlayerBoard$viewRoom = F4(
 								A2($elm$core$Debug$log, '(t.walls)', t.walls),
 								A2($elm$core$Debug$log, '(tile.walls)', tile.walls))) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 						case 'Activate':
-							var _v3 = subphase.a;
+							var _v2 = subphase.a;
 							return _Utils_eq(tile.status, $author$project$Game$Available) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 						default:
 							break _v0$4;
@@ -9337,31 +9382,31 @@ var $author$project$Game$subphaseToString = function (subphase) {
 				var _v2 = subphase.a;
 				return 'Action Phase';
 			case 'Excavate':
-				var _v3 = subphase.a;
-				return 'Escavate 1';
+				var times = subphase.a.a;
+				return 'Escavate ' + $elm$core$String$fromInt(times);
 			case 'Furnish':
-				var _v4 = subphase.a;
+				var _v3 = subphase.a;
 				return 'Furnish';
 			case 'PlaceRoom':
 				var tile = subphase.a.a;
 				return 'PlaceRoom ' + tile.title;
 			case 'BuildWall':
-				var _v5 = subphase.a;
+				var _v4 = subphase.a;
 				return 'Build a Wall';
 			case 'DestroyWall':
-				var _v6 = subphase.a;
+				var _v5 = subphase.a;
 				return 'Destroy a Wall';
 			case 'ExcavateThroughWall':
-				var _v7 = subphase.a;
+				var _v6 = subphase.a;
 				return 'Escavate through a Wall';
 			case 'Activate':
-				var _v8 = subphase.a;
+				var _v7 = subphase.a;
 				return 'Activate a Room 1';
 			case 'ChooseResource':
-				var _v9 = subphase.a;
+				var _v8 = subphase.a;
 				return 'Choose One Resource';
 			default:
-				var _v10 = subphase.a;
+				var _v9 = subphase.a;
 				return 'Choose the additional cave';
 		}
 	}
