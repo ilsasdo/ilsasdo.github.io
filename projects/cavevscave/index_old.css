@@ -1,0 +1,403 @@
+.tile {
+  background-size: contain;
+  border-radius: 10px;
+  border-style: groove;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.tile.hidden {
+  background-color: gray;
+}
+
+.tile .action {
+  position: absolute;
+  border-radius: 10px;
+}
+
+.tile .action {
+  border: 2px solid red;
+}
+
+.tile .action.doable {
+  border: 2px solid green;
+}
+
+.tile .action.doable:hover {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  cursor: pointer;
+}
+
+.tile .action.topleft {
+  aspect-ratio: 1;
+  width: 25%;
+  left: 5%;
+  top: 33%;
+}
+
+.tile .action.topright {
+  aspect-ratio: 2/1;
+  width: 55%;
+  left: 35%;
+  top: 33%;
+}
+
+.tile .action.bottomleft {
+  aspect-ratio: 1;
+  width: 25%;
+  left: 5%;
+  top: 66%;
+}
+
+.tile .action.bottomright {
+  aspect-ratio: 2/1;
+  width: 55%;
+  left: 35%;
+  top: 66%;
+}
+
+.tile .action.full {
+  aspect-ratio: 2/1;
+  width: 90%;
+  left: 5%;
+  top: 50%;
+}
+
+.tile .action.left {
+  aspect-ratio: 1;
+  width: 45%;
+  left: 2%;
+  top: 45%;
+}
+
+.tile .action.right {
+  aspect-ratio: 1;
+  width: 45%;
+  left: 52%;
+  top: 45%;
+}
+
+.tile .action.top {
+  aspect-ratio: 4/1;
+  width: 90%;
+  left: 5%;
+  top: 45%;
+}
+
+.tile .action.bottom {
+  aspect-ratio: 4/1;
+  width: 90%;
+  left: 5%;
+  top: 70%;
+}
+
+.tile .action.first {
+  aspect-ratio: 1/1.5;
+  width: 16%;
+  top: 55%;
+  left: 20%;
+}
+
+.tile .action.second {
+  aspect-ratio: 1/1.5;
+  width: 16%;
+  top: 55%;
+  left: 38%;
+}
+
+.tile .action.third {
+  aspect-ratio: 1/1.5;
+  width: 16%;
+  top: 55%;
+  left: 56%;
+}
+
+.tile .action.fourth {
+  aspect-ratio: 1/1.5;
+  width: 16%;
+  top: 55%;
+  left: 73%;
+}
+
+.playerboard {
+  position: relative;
+  float: left;
+  width: 33%;
+}
+
+.board {
+  background-image: url("assets/img/board.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2348/3838;
+}
+
+.freeaction {
+  width: 29%;
+  height: 5%;
+  position: relative;
+  left: 18%
+}
+
+.resources {
+  width: 29%;
+  height: 74.5%;
+  position: relative;
+  float: right;
+}
+
+.resources > div {
+  width: 16.5%;
+  aspect-ratio: 1;
+  position: absolute;
+}
+
+.resources .food {
+  background-color: darkolivegreen;
+  left: 0;
+}
+
+.resources .wood {
+  background-color: saddlebrown;
+  left: 16.5%;
+}
+
+.resources .stone {
+  background-color: gray;
+  left: 33%;
+}
+
+.resources .emmer {
+  background-color: yellow;
+  left: 49.5%;
+}
+
+.resources .flax {
+  background-color: greenyellow;
+  left: 66%;
+}
+
+.resources .gold {
+  background-color: gold;
+  left: 82.5%;
+}
+
+.resources .qty0, .resources .qty10 {
+  bottom: 2%;
+}
+.resources .qty1, .resources .qty11  {
+  bottom: 12%;
+}
+.resources .qty2, .resources .qty12  {
+  bottom: 27%;
+}
+.resources .qty3, .resources .qty13  {
+  bottom: 37%;
+}
+.resources .qty4, .resources .qty14  {
+  bottom: 47%;
+}
+.resources .qty5, .resources .qty15  {
+  bottom: 56%;
+}
+.resources .qty6, .resources .qty16  {
+  bottom: 66%;
+}
+.resources .qty7, .resources .qty17  {
+  bottom: 75%;
+}
+.resources .qty8, .resources .qty18  {
+  bottom: 84%;
+}
+.resources .qty9, .resources .qty19  {
+  bottom: 93%;
+}
+
+.availablerooms {
+  width: 32%;
+  float: left;
+}
+
+.availableroom {
+  float: left;
+  display: inline-block;
+  width: 23%;
+  aspect-ratio: 1;
+}
+
+.room {
+  position: absolute;
+  display: inline-block;
+  width: 23%;
+  aspect-ratio: 1;
+}
+
+.room-0 {
+  top: 10%;
+  left: 5%;
+}
+.room-1 {
+  top: 10%;
+  left: 32%;
+}
+.room-2 {
+  top: 27%;
+  left: 5%;
+}
+.room-3 {
+  top: 27%;
+  left: 32%;
+}
+.room-4 {
+  top: 45%;
+  left: 5%;
+}
+.room-5 {
+  top: 45%;
+  left: 32%;
+}
+.room-6 {
+  top: 62%;
+  left: 5%;
+}
+.room-7 {
+  top: 62%;
+  left: 32%;
+}
+.room-8 {
+  top: 80%;
+  left: 5%;
+}
+.room-9 {
+  top: 80%;
+  left: 32%;
+}
+.room-10 {
+  top: 80%;
+  left: 60%;
+}
+
+.wall {
+  position: absolute;
+  display: inline-block;
+  border: 1px solid red;
+}
+
+.wall.placed {
+  background-color: black;
+  cursor: pointer;
+}
+
+.wall.available {
+  background-color: transparent;
+}
+
+.wall-0 {
+  top: 10%;
+  left: 29%;
+  width: 4%;
+  height: 15%;
+}
+.wall-1 {
+  top: 25%;
+  left: 5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-2 {
+  top: 25%;
+  left: 32.5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-3 {
+  top: 27%;
+  left: 29%;
+  width: 4%;
+  height: 15%;
+}
+.wall-4 {
+  top: 42%;
+  left: 5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-5 {
+  top: 42%;
+  left: 32.5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-6 {
+  top: 45%;
+  left: 29%;
+  width: 4%;
+  height: 15%;
+}
+.wall-7 {
+  top: 60%;
+  left: 5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-8 {
+  top: 60%;
+  left: 32.5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-9 {
+  top: 62%;
+  left: 29%;
+  width: 4%;
+  height: 15%;
+}
+.wall-10 {
+  top: 77%;
+  left: 5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-11 {
+  top: 77%;
+  left: 32.5%;
+  width: 23%;
+  height: 2.5%;
+}
+.wall-12 {
+  top: 80%;
+  left: 29%;
+  width: 4%;
+  height: 15%;
+}
+.wall-13 {
+  top: 80%;
+  left: 56%;
+  width: 4%;
+  height: 15%;
+}
+
+.actiontiles {
+  background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.actiontile {
+  display: inline-block;
+  width: 8.3%;
+  aspect-ratio: 1;
+}
+
+.playerboard > .actiontiles > .actiontile {
+  width: 25%;
+  aspect-ratio: 1;
+}
+
+.pick {
+  cursor: pointer;
+  border: 3px solid green;
+}
