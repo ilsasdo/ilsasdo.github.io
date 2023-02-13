@@ -8855,7 +8855,7 @@ var $author$project$Main$viewActionTiles = function (game) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('pure-g')
+				$elm$html$Html$Attributes$class('pure-g actiontiles')
 			]),
 		_List_fromArray(
 			[
@@ -8863,7 +8863,7 @@ var $author$project$Main$viewActionTiles = function (game) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('pure-u-1')
+						$elm$html$Html$Attributes$class('pure-u-md-1-4')
 					]),
 				A2(
 					$elm$core$List$map,
@@ -8873,7 +8873,7 @@ var $author$project$Main$viewActionTiles = function (game) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('pure-u-1')
+						$elm$html$Html$Attributes$class('pure-u-md-1-4')
 					]),
 				A2(
 					$elm$core$List$map,
@@ -8886,7 +8886,7 @@ var $author$project$Main$viewActionTiles = function (game) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('pure-u-1')
+						$elm$html$Html$Attributes$class('pure-u-md-1-4')
 					]),
 				A2(
 					$elm$core$List$map,
@@ -8899,7 +8899,7 @@ var $author$project$Main$viewActionTiles = function (game) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('pure-u-1')
+						$elm$html$Html$Attributes$class('pure-u-md-1-4')
 					]),
 				A2(
 					$elm$core$List$map,
@@ -9057,12 +9057,21 @@ var $author$project$Main$viewAvailableRooms = F3(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('availablerooms')
+					$elm$html$Html$Attributes$class('pure-g availablerooms')
 				]),
-			A2(
-				$elm$core$List$map,
-				A2($author$project$Main$viewAvailableRoom, player, subphase),
-				rooms));
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('pure-u-md-12')
+						]),
+					A2(
+						$elm$core$List$map,
+						A2($author$project$Main$viewAvailableRoom, player, subphase),
+						rooms))
+				]));
 	});
 var $author$project$PlayerBoard$viewActionTiles = F2(
 	function (resources, actionTiles) {
@@ -9666,7 +9675,34 @@ var $author$project$Main$viewSoloGame = function (game) {
 		_List_fromArray(
 			[
 				$author$project$Main$viewStatusBar(game),
-				$author$project$Main$viewActionTiles(game)
+				$author$project$Main$viewActionTiles(game),
+				A3(
+				$author$project$Main$viewAvailableRooms,
+				$author$project$Main$getCurrentPlayer(game),
+				$author$project$Stack$top(game.stack),
+				game.availableRooms),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pure-g')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('pure-u-1')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$author$project$PlayerBoard$viewBoard,
+								game.player1,
+								$author$project$Stack$top(game.stack))
+							]))
+					]))
 			]));
 };
 var $author$project$Main$viewInPlayGame = function (game) {

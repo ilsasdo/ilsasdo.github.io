@@ -13,3 +13,10 @@
 .tile.rock {
   background-color: darkgray;
 }
+
+.board {
+  background-image: url("assets/img/board.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 400px;
+}
