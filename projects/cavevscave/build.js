@@ -8454,7 +8454,10 @@ var $author$project$Main$update = F2(
 								player2,
 								{
 									freeAction: A2($author$project$Tiles$setStatus, $author$project$Game$Available, player1.freeAction),
-									rooms: _Utils_eq(game.mode, $author$project$Game$SoloGame) ? rooms : $author$project$PlayerBoard$init(
+									rooms: _Utils_eq(game.mode, $author$project$Game$SoloGame) ? A2(
+										$elm$core$List$take,
+										9,
+										A2($elm$core$List$drop, 9, rooms)) : $author$project$PlayerBoard$init(
 										A2(
 											$elm$core$List$take,
 											9,
