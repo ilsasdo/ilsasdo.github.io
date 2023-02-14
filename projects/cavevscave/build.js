@@ -5438,14 +5438,14 @@ var $author$project$Game$Available = {$: 'Available'};
 var $author$project$Game$PlaceRoom = function (a) {
 	return {$: 'PlaceRoom', a: a};
 };
-var $author$project$Tiles$updateStatus = F3(
-	function (tile, status, tiles) {
+var $author$project$Tiles$updateStatus = F4(
+	function (tile, fromStatus, toStatus, tiles) {
 		return A2(
 			$elm$core$List$map,
 			function (t) {
-				return _Utils_eq(t.title, tile.title) ? _Utils_update(
+				return (_Utils_eq(t.title, tile.title) && _Utils_eq(t.status, fromStatus)) ? _Utils_update(
 					t,
-					{status: status}) : t;
+					{status: toStatus}) : t;
 			},
 			tiles);
 	});
@@ -5454,7 +5454,7 @@ var $author$project$PlayerBoard$activateRoom = F2(
 		return _Utils_update(
 			player,
 			{
-				rooms: A3($author$project$Tiles$updateStatus, tile, $author$project$Game$Active, player.rooms)
+				rooms: A4($author$project$Tiles$updateStatus, tile, $author$project$Game$Available, $author$project$Game$Active, player.rooms)
 			});
 	});
 var $author$project$Game$Empty = {$: 'Empty'};
@@ -6149,7 +6149,7 @@ var $author$project$PlayerBoard$escavateRoom = F2(
 				rooms: A2(
 					$author$project$Tiles$updateWalls,
 					player.walls,
-					A3($author$project$Tiles$updateStatus, tile, $author$project$Game$Empty, player.rooms))
+					A4($author$project$Tiles$updateStatus, tile, $author$project$Game$Rock, $author$project$Game$Empty, player.rooms))
 			});
 	});
 var $elm$core$List$takeReverse = F3(
@@ -6559,7 +6559,7 @@ var $author$project$Main$removeActionTile = F2(
 		return _Utils_update(
 			game,
 			{
-				actionTiles: A3($author$project$Tiles$updateStatus, tile, $author$project$Game$Empty, game.actionTiles)
+				actionTiles: A4($author$project$Tiles$updateStatus, tile, $author$project$Game$Available, $author$project$Game$Empty, game.actionTiles)
 			});
 	});
 var $author$project$Main$removeFromAvailableRooms = F2(
@@ -8454,7 +8454,7 @@ var $author$project$Main$update = F2(
 								player2,
 								{
 									freeAction: A2($author$project$Tiles$setStatus, $author$project$Game$Available, player1.freeAction),
-									rooms: $author$project$PlayerBoard$init(
+									rooms: _Utils_eq(game.mode, $author$project$Game$SoloGame) ? rooms : $author$project$PlayerBoard$init(
 										A2(
 											$elm$core$List$take,
 											9,
