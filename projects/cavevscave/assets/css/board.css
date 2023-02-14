@@ -1,0 +1,67 @@
+.board {
+    position: relative;
+    background-image: url("../img/board.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 367px;
+    height: 600px;
+}
+
+.tile.freeaction {
+    width: 29%;
+    height: 5%;
+    position: relative;
+    left: 14%;
+    top: -10px;
+    border: none;
+}
+
+.room {
+    position: absolute;
+    display: inline-block;
+}
+
+.room-0 {
+    top: 10%;
+    left: 5%;
+}
+.room-1 {
+    top: 10%;
+    left: 32%;
+}
+.room-2 {
+    top: 27%;
+    left: 5%;
+}
+.room-3 {
+    top: 27%;
+    left: 32%;
+}
+.room-4 {
+    top: 45%;
+    left: 5%;
+}
+.room-5 {
+    top: 45%;
+    left: 32%;
+}
+.room-6 {
+    top: 62%;
+    left: 5%;
+}
+.room-7 {
+    top: 62%;
+    left: 32%;
+}
+.room-8 {
+    top: 80%;
+    left: 5%;
+}
+.room-9 {
+    top: 80%;
+    left: 32%;
+}
+.room-10 {
+    top: 80%;
+    left: 60%;
+}

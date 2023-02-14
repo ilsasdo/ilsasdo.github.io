@@ -5255,9 +5255,9 @@ var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
 var $author$project$Game$None = {$: 'None'};
-var $author$project$Game$PlayerBoard = F6(
-	function (resources, freeAction, rooms, walls, actionTiles, active) {
-		return {actionTiles: actionTiles, active: active, freeAction: freeAction, resources: resources, rooms: rooms, walls: walls};
+var $author$project$Game$PlayerBoard = F7(
+	function (resources, freeAction, rooms, walls, actionTiles, active, score) {
+		return {actionTiles: actionTiles, active: active, freeAction: freeAction, resources: resources, rooms: rooms, score: score, walls: walls};
 	});
 var $author$project$Game$Resources = F9(
 	function (food, wood, stone, emmer, flax, gold, actions, availableWalls, opponentsGold) {
@@ -5409,14 +5409,15 @@ var $author$project$Tiles$tileFreeAction = A8(
 		]));
 var $author$project$PlayerBoard$newBoard = F2(
 	function (active, gold) {
-		return A6(
+		return A7(
 			$author$project$Game$PlayerBoard,
 			A9($author$project$Game$Resources, 1, 1, 1, 1, 1, gold, 1, 7, 0),
 			$author$project$Tiles$tileFreeAction,
 			_List_Nil,
 			A2($elm$core$Array$repeat, 14, $author$project$Game$None),
 			_List_Nil,
-			active);
+			active,
+			1);
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -6417,6 +6418,10 @@ var $author$project$Main$activatePlayer = function (game) {
 			opponent.resources.gold,
 			$author$project$Main$getCurrentPlayer(game)));
 };
+var $author$project$Main$actionsPerRound = F2(
+	function (mode, round) {
+		return _Utils_eq(mode, $author$project$Game$SoloGame) ? ((round < 4) ? 2 : ((round < 7) ? 3 : 4)) : ((round < 4) ? 2 : ((round < 8) ? 3 : 4));
+	});
 var $author$project$PlayerBoard$restorePlayerNextRound = F2(
 	function (round, player) {
 		var resources = player.resources;
@@ -6432,7 +6437,7 @@ var $author$project$PlayerBoard$restorePlayerNextRound = F2(
 	});
 var $author$project$Main$nextRound = function (game) {
 	var round = game.round + 1;
-	var actions = (round < 4) ? 2 : ((round < 8) ? 3 : 4);
+	var actions = A2($author$project$Main$actionsPerRound, game.mode, round);
 	var actionTiles = A2(
 		$elm$core$List$indexedMap,
 		function (i) {
@@ -6777,6 +6782,9 @@ var $author$project$Tiles$tileCameraSegreta = A8(
 			_List_fromArray(
 				[0, 1]))
 		]));
+var $author$project$Game$Excavate = function (a) {
+	return {$: 'Excavate', a: a};
+};
 var $author$project$Tiles$tileCavaInEspansione = A8(
 	$author$project$Game$Tile,
 	'Cava in Espansione',
@@ -6786,8 +6794,8 @@ var $author$project$Tiles$tileCavaInEspansione = A8(
 	'assets/img/rooms/cava_in_espansione.jpg',
 	A2(
 		$author$project$Resources$priceStone,
-		3,
-		A2($author$project$Resources$priceWood, 1, $author$project$Resources$priceFree)),
+		1,
+		A2($author$project$Resources$priceWood, 3, $author$project$Resources$priceFree)),
 	A4($author$project$Game$Walls, $author$project$Game$Placed, $author$project$Game$Placed, $author$project$Game$None, $author$project$Game$Placed),
 	_List_fromArray(
 		[
@@ -6801,9 +6809,12 @@ var $author$project$Tiles$tileCavaInEspansione = A8(
 				$elm$core$Basics$ge,
 				1),
 			function (res) {
-				return res;
+				return A2($author$project$Resources$addGold, -1, res);
 			},
-			_List_Nil,
+			_List_fromArray(
+				[
+					$author$project$Game$Excavate(1)
+				]),
 			_List_fromArray(
 				[0]))
 		]));
@@ -7185,7 +7196,7 @@ var $author$project$Tiles$tileLavoriDomestici = A8(
 			A4(
 			$author$project$Tiles$topAction,
 			function (r) {
-				return _Utils_cmp(r.food, r.actions) > 0;
+				return _Utils_cmp(r.food, r.actions) > -1;
 			},
 			function (r) {
 				return A2($author$project$Resources$addFood, -r.actions, r);
@@ -7223,9 +7234,6 @@ var $author$project$Tiles$tileLavoriDomestici = A8(
 			_List_fromArray(
 				[1, 2]))
 		]));
-var $author$project$Game$Excavate = function (a) {
-	return {$: 'Excavate', a: a};
-};
 var $author$project$Tiles$topLeftAction = F4(
 	function (isDoable, _do, subphase, disableActions) {
 		return A6($author$project$Game$Action, 'topleft', true, isDoable, _do, subphase, disableActions);
@@ -7305,7 +7313,7 @@ var $author$project$Tiles$tileArredare = A8(
 			A4(
 			$author$project$Tiles$bottomAction,
 			function (r) {
-				return _Utils_cmp(r.food, r.actions) > 0;
+				return _Utils_cmp(r.food, r.actions) > -1;
 			},
 			function (r) {
 				return A2($author$project$Resources$addFood, -r.actions, r);
@@ -8381,6 +8389,27 @@ var $author$project$Main$updateAvailableWalls = F2(
 				player2: A2($author$project$Main$updateAvailableWallsResource, qty, player2)
 			});
 	});
+var $author$project$PlayerBoard$updateScore = function (player) {
+	return _Utils_update(
+		player,
+		{
+			score: A3(
+				$elm$core$List$foldl,
+				$elm$core$Basics$add,
+				player.resources.gold,
+				A2(
+					$elm$core$List$map,
+					function (r) {
+						return r.score;
+					},
+					A2(
+						$elm$core$List$filter,
+						function (r) {
+							return _Utils_eq(r.status, $author$project$Game$Available) || _Utils_eq(r.status, $author$project$Game$Active);
+						},
+						player.rooms)))
+		});
+};
 var $author$project$Main$update = F2(
 	function (msg, game) {
 		var player1 = game.player1;
@@ -8485,14 +8514,15 @@ var $author$project$Main$update = F2(
 							A2(
 								$author$project$Main$setCurrentPlayer,
 								game,
-								A2(
-									$author$project$PlayerBoard$applyWoodStoreroom,
-									action.subphase,
-									A3(
-										$author$project$PlayerBoard$doAction,
-										tile,
-										action,
-										$author$project$Main$getCurrentPlayer(game)))))));
+								$author$project$PlayerBoard$updateScore(
+									A2(
+										$author$project$PlayerBoard$applyWoodStoreroom,
+										action.subphase,
+										A3(
+											$author$project$PlayerBoard$doAction,
+											tile,
+											action,
+											$author$project$Main$getCurrentPlayer(game))))))));
 			case 'SelectWall':
 				var index = msg.a;
 				var _v2 = $author$project$Stack$top(game.stack);
@@ -8509,11 +8539,12 @@ var $author$project$Main$update = F2(
 										A2(
 											$author$project$Main$updateAvailableWalls,
 											-1,
-											A2(
-												$author$project$Main$setCurrentPlayer,
-												game,
-												$author$project$PlayerBoard$applyDungeon(
-													A2($author$project$PlayerBoard$buildWall, index, activePlayer))))));
+											$author$project$Main$popFromPhase(
+												A2(
+													$author$project$Main$setCurrentPlayer,
+													game,
+													$author$project$PlayerBoard$applyDungeon(
+														A2($author$project$PlayerBoard$buildWall, index, activePlayer)))))));
 							case 'DestroyWall':
 								var _v4 = _v2.a;
 								return $author$project$Main$swap(
@@ -8523,10 +8554,11 @@ var $author$project$Main$update = F2(
 										A2(
 											$author$project$Main$updateAvailableWalls,
 											1,
-											A2(
-												$author$project$Main$setCurrentPlayer,
-												game,
-												A2($author$project$PlayerBoard$destroyWall, index, activePlayer)))));
+											$author$project$Main$popFromPhase(
+												A2(
+													$author$project$Main$setCurrentPlayer,
+													game,
+													A2($author$project$PlayerBoard$destroyWall, index, activePlayer))))));
 							default:
 								break _v2$2;
 						}
@@ -8569,7 +8601,8 @@ var $author$project$Main$update = F2(
 													A2(
 														$author$project$Main$setCurrentPlayer,
 														game,
-														A3($author$project$PlayerBoard$placeRoom, tile, tileToPlace, activePlayer)))))));
+														$author$project$PlayerBoard$updateScore(
+															A3($author$project$PlayerBoard$placeRoom, tile, tileToPlace, activePlayer))))))));
 							case 'ExcavateThroughWall':
 								var _v7 = _v5.a;
 								return $author$project$Main$swap(
@@ -9310,7 +9343,6 @@ var $author$project$PlayerBoard$isExcavatable = F2(
 		var roomArray = $elm$core$Array$fromList(board.rooms);
 		return A2($author$project$PlayerBoard$isReachable, tileIndex, roomArray);
 	});
-var $elm$core$Debug$log = _Debug_log;
 var $author$project$PlayerBoard$viewNonSelectableTile = F3(
 	function (resources, index, tile) {
 		return A2(
@@ -9365,13 +9397,7 @@ var $author$project$PlayerBoard$viewRoom = F4(
 							return (_Utils_eq(tile.status, $author$project$Game$Rock) && A2($author$project$PlayerBoard$isExcavatable, board, tile)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 						case 'PlaceRoom':
 							var t = subphase.a.a;
-							return (A2(
-								$elm$core$Debug$log,
-								'(tile.status == Empty)',
-								_Utils_eq(tile.status, $author$project$Game$Empty)) && A2(
-								$author$project$Walls$matches,
-								A2($elm$core$Debug$log, '(t.walls)', t.walls),
-								A2($elm$core$Debug$log, '(tile.walls)', tile.walls))) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
+							return (_Utils_eq(tile.status, $author$project$Game$Empty) && A2($author$project$Walls$matches, t.walls, tile.walls)) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
 						case 'Activate':
 							var _v2 = subphase.a;
 							return _Utils_eq(tile.status, $author$project$Game$Available) ? A3($author$project$PlayerBoard$viewSelectableTile, board.resources, index, tile) : A3($author$project$PlayerBoard$viewNonSelectableTile, board.resources, index, tile);
@@ -9598,13 +9624,13 @@ var $author$project$Game$subphaseToString = function (subphase) {
 		switch (subphase.a.$) {
 			case 'NewActionPhase':
 				var _v1 = subphase.a;
-				return 'New Action Phase';
+				return 'Choose a New Action Tile';
 			case 'ActionPhase':
 				var _v2 = subphase.a;
-				return 'Action Phase';
+				return 'Play Your Actions';
 			case 'Excavate':
 				var times = subphase.a.a;
-				return 'Escavate ' + $elm$core$String$fromInt(times);
+				return 'Select A Room to Excavate ' + $elm$core$String$fromInt(times);
 			case 'Furnish':
 				var _v3 = subphase.a;
 				return 'Furnish';
@@ -9613,16 +9639,16 @@ var $author$project$Game$subphaseToString = function (subphase) {
 				return 'PlaceRoom ' + tile.title;
 			case 'BuildWall':
 				var _v4 = subphase.a;
-				return 'Build a Wall';
+				return 'Select a Wall to Build';
 			case 'DestroyWall':
 				var _v5 = subphase.a;
-				return 'Destroy a Wall';
+				return 'Select a Wall to Destroy';
 			case 'ExcavateThroughWall':
 				var _v6 = subphase.a;
-				return 'Escavate through a Wall';
+				return 'Select a Room to Escavate (through walls)';
 			case 'Activate':
 				var _v7 = subphase.a;
-				return 'Activate a Room 1';
+				return 'Select a Room to Activate';
 			case 'ChooseResource':
 				var _v8 = subphase.a;
 				return 'Choose One Resource';
@@ -9631,6 +9657,48 @@ var $author$project$Game$subphaseToString = function (subphase) {
 				return 'Choose the additional cave';
 		}
 	}
+};
+var $author$project$Main$viewFooter = function (game) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('pure-g footer')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pure-u-1-2')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$author$project$Game$subphaseToString(
+							$author$project$Stack$top(game.stack)))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pure-u-1-2')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Game$Pass)
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Pass')
+							]))
+					]))
+			]));
 };
 var $author$project$Main$viewStatusBar = function (game) {
 	return A2(
@@ -9642,29 +9710,73 @@ var $author$project$Main$viewStatusBar = function (game) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$button,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Events$onClick($author$project$Game$Pass)
+						$elm$html$Html$Attributes$class('pure-u-8-24')
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Pass')
+						$elm$html$Html$text('Cave vs Cave')
 					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('pure-u-1')
+						$elm$html$Html$Attributes$class('pure-u-3-24 item')
 					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text(
-						'Round: ' + ($elm$core$String$fromInt(game.round) + (' || Player ' + ($elm$core$String$fromInt(
-							game.player1.active ? 1 : 2) + (' || Actions: ' + ($elm$core$String$fromInt(
+						'R: ' + $elm$core$String$fromInt(game.round))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pure-u-3-24 item')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						'W: ' + $elm$core$String$fromInt(game.availableWalls))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pure-u-3-24 item')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						'P: ' + $elm$core$String$fromInt(
+							game.player1.active ? 1 : 2))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pure-u-4-24 item')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						'A: ' + ($elm$core$String$fromInt(
 							$elm$core$List$length(
-								$author$project$Main$getCurrentPlayer(game).actionTiles)) + ('/' + ($elm$core$String$fromInt(game.actions) + (' || Phase: ' + ($author$project$Game$subphaseToString(
-							$author$project$Stack$top(game.stack)) + (' || Available Walls: ' + $elm$core$String$fromInt(game.availableWalls))))))))))))
+								$author$project$Main$getCurrentPlayer(game).actionTiles)) + ('/' + $elm$core$String$fromInt(game.actions))))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('pure-u-3-24 item score')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromInt(
+							$author$project$Main$getCurrentPlayer(game).score))
 					]))
 			]));
 };
@@ -9675,34 +9787,44 @@ var $author$project$Main$viewSoloGame = function (game) {
 		_List_fromArray(
 			[
 				$author$project$Main$viewStatusBar(game),
-				$author$project$Main$viewActionTiles(game),
-				A3(
-				$author$project$Main$viewAvailableRooms,
-				$author$project$Main$getCurrentPlayer(game),
-				$author$project$Stack$top(game.stack),
-				game.availableRooms),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('pure-g')
+						$elm$html$Html$Attributes$class('content')
 					]),
 				_List_fromArray(
 					[
+						$author$project$Main$viewActionTiles(game),
+						A3(
+						$author$project$Main$viewAvailableRooms,
+						$author$project$Main$getCurrentPlayer(game),
+						$author$project$Stack$top(game.stack),
+						game.availableRooms),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('pure-u-1')
+								$elm$html$Html$Attributes$class('pure-g')
 							]),
 						_List_fromArray(
 							[
 								A2(
-								$author$project$PlayerBoard$viewBoard,
-								game.player1,
-								$author$project$Stack$top(game.stack))
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('pure-u-1')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$author$project$PlayerBoard$viewBoard,
+										game.player1,
+										$author$project$Stack$top(game.stack))
+									]))
 							]))
-					]))
+					])),
+				$author$project$Main$viewFooter(game)
 			]));
 };
 var $author$project$Main$viewInPlayGame = function (game) {

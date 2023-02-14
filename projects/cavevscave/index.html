@@ -4,15 +4,23 @@
   <title>Main</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="build.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/board.css">
+  <link rel="stylesheet" href="assets/css/tile.css">
+  <link rel="stylesheet" href="assets/css/resources.css">
+  <link rel="stylesheet" href="assets/css/wall.css">
 </head>
 
 <body>
-<div id="myapp"></div>
+<div id="cave-vs-cave"></div>
 <script>
-  var app = Elm.Main.init({
-    node: document.getElementById('myapp')
+  Elm.Main.init({
+    node: document.getElementById('cave-vs-cave')
   });
 </script>
 </body>

@@ -1,0 +1,73 @@
+.resources {
+    width: 29%;
+    height: 74.5%;
+    position: relative;
+    float: right;
+}
+
+.resources > div {
+    width: 16.5%;
+    aspect-ratio: 1;
+    position: absolute;
+}
+
+.resources .food {
+    background-color: darkolivegreen;
+    left: 0;
+}
+
+.resources .wood {
+    background-color: saddlebrown;
+    left: 16.5%;
+}
+
+.resources .stone {
+    background-color: gray;
+    left: 33%;
+}
+
+.resources .emmer {
+    background-color: yellow;
+    left: 49.5%;
+}
+
+.resources .flax {
+    background-color: greenyellow;
+    left: 66%;
+}
+
+.resources .gold {
+    background-color: gold;
+    left: 82.5%;
+}
+
+.resources .qty0, .resources .qty10 {
+    bottom: 2%;
+}
+.resources .qty1, .resources .qty11  {
+    bottom: 12%;
+}
+.resources .qty2, .resources .qty12  {
+    bottom: 27%;
+}
+.resources .qty3, .resources .qty13  {
+    bottom: 37%;
+}
+.resources .qty4, .resources .qty14  {
+    bottom: 47%;
+}
+.resources .qty5, .resources .qty15  {
+    bottom: 56%;
+}
+.resources .qty6, .resources .qty16  {
+    bottom: 66%;
+}
+.resources .qty7, .resources .qty17  {
+    bottom: 75%;
+}
+.resources .qty8, .resources .qty18  {
+    bottom: 84%;
+}
+.resources .qty9, .resources .qty19  {
+    bottom: 93%;
+}
