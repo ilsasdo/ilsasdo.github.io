@@ -7013,7 +7013,7 @@ var $author$project$Tiles$tileOfficina = A8(
 					res) && A4(
 					$author$project$Resources$require,
 					function ($) {
-						return $.food;
+						return $.wood;
 					},
 					$elm$core$Basics$ge,
 					2,
