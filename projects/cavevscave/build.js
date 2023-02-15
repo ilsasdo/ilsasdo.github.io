@@ -6539,7 +6539,7 @@ var $author$project$PlayerBoard$placeRoom = F3(
 				rooms: A2(
 					$elm$core$List$map,
 					function (r) {
-						return _Utils_eq(r.title, tile.title) ? tileToPlace : r;
+						return (_Utils_eq(r.title, tile.title) && _Utils_eq(r.status, $author$project$Game$Empty)) ? tileToPlace : r;
 					},
 					player.rooms)
 			});
