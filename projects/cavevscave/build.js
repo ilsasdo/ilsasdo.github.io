@@ -5557,7 +5557,7 @@ var $author$project$PlayerBoard$playerHasEquipment = F2(
 				A2(
 					$elm$core$List$filter,
 					function (t) {
-						return _Utils_eq(t.status, $author$project$Game$Available);
+						return _Utils_eq(t.status, $author$project$Game$Available) || _Utils_eq(t.status, $author$project$Game$Active);
 					},
 					player.rooms)));
 	});
@@ -8952,14 +8952,14 @@ var $author$project$PlayerBoard$moreOrangeRooms = F2(
 			A2(
 				$elm$core$List$filter,
 				function (t) {
-					return _Utils_eq(t.tileType, $author$project$Game$Orange);
+					return _Utils_eq(t.tileType, $author$project$Game$Orange) && (_Utils_eq(t.status, $author$project$Game$Available) || _Utils_eq(t.status, $author$project$Game$Active));
 				},
 				player.rooms));
 		var blueCount = $elm$core$List$length(
 			A2(
 				$elm$core$List$filter,
 				function (t) {
-					return _Utils_eq(t.tileType, $author$project$Game$Blue);
+					return _Utils_eq(t.tileType, $author$project$Game$Blue) && (_Utils_eq(t.status, $author$project$Game$Available) || _Utils_eq(t.status, $author$project$Game$Active));
 				},
 				player.rooms));
 		return _Utils_eq(tile.tileType, $author$project$Game$Blue) ? (_Utils_cmp(orangeCount, blueCount + 1) > 0) : true;
