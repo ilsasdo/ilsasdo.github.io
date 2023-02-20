@@ -5832,11 +5832,11 @@ var $author$project$Walls$get = F2(
 	});
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$Tiles$updateTileWalls = F3(
-	function (walls, index, tile) {
+	function (walls, tileIndex, tile) {
 		if (!_Utils_eq(tile.status, $author$project$Game$Empty)) {
 			return tile;
 		} else {
-			switch (index) {
+			switch (tileIndex) {
 				case 0:
 					return _Utils_update(
 						tile,
@@ -5922,8 +5922,8 @@ var $author$project$Tiles$updateTileWalls = F3(
 								$author$project$Game$Walls,
 								A2($author$project$Walls$get, 8, walls),
 								$author$project$Game$Placed,
-								A2($author$project$Walls$get, 9, walls),
-								A2($author$project$Walls$get, 11, walls))
+								A2($author$project$Walls$get, 11, walls),
+								A2($author$project$Walls$get, 9, walls))
 						});
 				case 8:
 					return _Utils_update(
@@ -6044,7 +6044,7 @@ var $elm$core$List$member = F2(
 			xs);
 	});
 var $author$project$Tiles$consumeAction = F2(
-	function (tile, action) {
+	function (action, tile) {
 		return _Utils_update(
 			tile,
 			{
@@ -6065,13 +6065,13 @@ var $author$project$PlayerBoard$updateTile = F2(
 		return A2(
 			$elm$core$List$map,
 			function (r) {
-				return _Utils_eq(r.title, tile.title) ? tile : r;
+				return (_Utils_eq(r.title, tile.title) && _Utils_eq(r.status, tile.status)) ? tile : r;
 			},
 			tiles);
 	});
 var $author$project$PlayerBoard$doAction = F3(
 	function (tile, action, player) {
-		var consumedTile = A2($author$project$Tiles$consumeAction, tile, action);
+		var consumedTile = A2($author$project$Tiles$consumeAction, action, tile);
 		return _Utils_update(
 			player,
 			{
