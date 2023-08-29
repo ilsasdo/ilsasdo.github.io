@@ -5740,7 +5740,6 @@ var $author$project$Minesweeper$OnGoing = {$: 'OnGoing'};
 var $author$project$Minesweeper$ResetGame = function (a) {
 	return {$: 'ResetGame', a: a};
 };
-var $author$project$Minesweeper$UpdateGameState = {$: 'UpdateGameState'};
 var $author$project$Minesweeper$Victory = {$: 'Victory'};
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
@@ -6375,17 +6374,31 @@ var $author$project$Minesweeper$putFlagOnCell = F2(
 			cell,
 			{flag: true}))) : cell;
 	});
+var $author$project$Minesweeper$updateFlagCount = function (model) {
+	return _Utils_update(
+		model,
+		{
+			flagCount: $elm$core$List$length(
+				A2(
+					$elm$core$List$filter,
+					function ($) {
+						return $.flag;
+					},
+					$Punie$elm_matrix$Matrix$toList(model.minefield)))
+		});
+};
 var $author$project$Minesweeper$putFlag = F2(
 	function (cell, model) {
-		return _Utils_update(
-			model,
-			{
-				gameState: $author$project$Minesweeper$OnGoing,
-				minefield: A2(
-					$Punie$elm_matrix$Matrix$map,
-					$author$project$Minesweeper$putFlagOnCell(cell),
-					model.minefield)
-			});
+		return $author$project$Minesweeper$updateFlagCount(
+			_Utils_update(
+				model,
+				{
+					gameState: $author$project$Minesweeper$OnGoing,
+					minefield: A2(
+						$Punie$elm_matrix$Matrix$map,
+						$author$project$Minesweeper$putFlagOnCell(cell),
+						model.minefield)
+				}));
 	});
 var $author$project$Minesweeper$revealFirstCell = F2(
 	function (cell, minefield) {
@@ -6460,16 +6473,7 @@ var $author$project$Minesweeper$updateGameState = function (model) {
 		return _Utils_Tuple2(
 			_Utils_update(
 				model,
-				{
-					flagCount: $elm$core$List$length(
-						A2(
-							$elm$core$List$filter,
-							function (c) {
-								return c.flag;
-							},
-							$Punie$elm_matrix$Matrix$toList(model.minefield))),
-					gameState: gameState
-				}),
+				{gameState: gameState}),
 			$elm$core$Platform$Cmd$none);
 	}
 };
@@ -6501,9 +6505,7 @@ var $author$project$Minesweeper$update = F2(
 					var cell = msg.a;
 					return _Utils_eq(model.gameState, $author$project$Minesweeper$NotStarted) ? _Utils_Tuple2(
 						A2($author$project$Minesweeper$putFlag, cell, model),
-						A2($author$project$Minesweeper$generateMines, cell, model)) : A2(
-						$author$project$Minesweeper$update,
-						$author$project$Minesweeper$UpdateGameState,
+						A2($author$project$Minesweeper$generateMines, cell, model)) : $author$project$Minesweeper$updateGameState(
 						A2($author$project$Minesweeper$putFlag, cell, model));
 				case 'RevealCell':
 					var cell = msg.a;
@@ -6511,9 +6513,7 @@ var $author$project$Minesweeper$update = F2(
 						_Utils_update(
 							model,
 							{gameState: $author$project$Minesweeper$OnGoing}),
-						A2($author$project$Minesweeper$generateMines, cell, model)) : A2(
-						$author$project$Minesweeper$update,
-						$author$project$Minesweeper$UpdateGameState,
+						A2($author$project$Minesweeper$generateMines, cell, model)) : $author$project$Minesweeper$updateGameState(
 						_Utils_update(
 							model,
 							{
@@ -6533,13 +6533,9 @@ var $author$project$Minesweeper$update = F2(
 									A2($author$project$Minesweeper$placeMines, mines, model))
 							}),
 						$elm$core$Platform$Cmd$none);
-				case 'UpdateGameState':
-					return $author$project$Minesweeper$updateGameState(model);
 				default:
 					var cell = msg.a;
-					return A2(
-						$author$project$Minesweeper$update,
-						$author$project$Minesweeper$UpdateGameState,
+					return $author$project$Minesweeper$updateGameState(
 						_Utils_update(
 							model,
 							{
