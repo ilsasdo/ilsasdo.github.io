@@ -5243,9 +5243,9 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Minesweeper$Easy = {$: 'Easy'};
-var $author$project$Minesweeper$GameModel = F6(
-	function (minefield, mineCount, flagCount, gameState, elapsedTime, gameType) {
-		return {elapsedTime: elapsedTime, flagCount: flagCount, gameState: gameState, gameType: gameType, mineCount: mineCount, minefield: minefield};
+var $author$project$Minesweeper$GameModel = F7(
+	function (minefield, mineCount, flagCount, gameState, elapsedTime, gameType, longPress) {
+		return {elapsedTime: elapsedTime, flagCount: flagCount, gameState: gameState, gameType: gameType, longPress: longPress, mineCount: mineCount, minefield: minefield};
 	});
 var $author$project$Minesweeper$NotStarted = {$: 'NotStarted'};
 var $author$project$Minesweeper$Cell = F7(
@@ -5282,14 +5282,15 @@ var $author$project$Minesweeper$initEmptyMines = F2(
 	});
 var $author$project$Minesweeper$newGame = F4(
 	function (width, height, mineCount, difficulty) {
-		return A6(
+		return A7(
 			$author$project$Minesweeper$GameModel,
 			A2($author$project$Minesweeper$initEmptyMines, width, height),
 			mineCount,
 			0,
 			$author$project$Minesweeper$NotStarted,
 			0,
-			difficulty);
+			difficulty,
+			$elm$core$Maybe$Nothing);
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -5735,12 +5736,20 @@ var $author$project$Minesweeper$subscriptions = function (model) {
 };
 var $author$project$Minesweeper$Advanced = {$: 'Advanced'};
 var $author$project$Minesweeper$Defeat = {$: 'Defeat'};
+var $author$project$Minesweeper$MaybeLongPress = {$: 'MaybeLongPress'};
 var $author$project$Minesweeper$Medium = {$: 'Medium'};
 var $author$project$Minesweeper$OnGoing = {$: 'OnGoing'};
 var $author$project$Minesweeper$ResetGame = function (a) {
 	return {$: 'ResetGame', a: a};
 };
+var $author$project$Minesweeper$RightClick = function (a) {
+	return {$: 'RightClick', a: a};
+};
 var $author$project$Minesweeper$Victory = {$: 'Victory'};
+var $elm$core$Basics$always = F2(
+	function (a, _v0) {
+		return a;
+	});
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -6411,6 +6420,7 @@ var $author$project$Minesweeper$revealFirstCell = F2(
 				{hidden: false}),
 			minefield) : A3($author$project$Minesweeper$revealCell, cell.x, cell.y, minefield);
 	});
+var $elm$core$Process$sleep = _Process_sleep;
 var $author$project$Minesweeper$greaterThan = F2(
 	function (a, b) {
 		return _Utils_cmp(a, b) < 0;
@@ -6479,68 +6489,102 @@ var $author$project$Minesweeper$updateGameState = function (model) {
 };
 var $author$project$Minesweeper$update = F2(
 	function (msg, model) {
-		if ((_Utils_eq(model.gameState, $author$project$Minesweeper$Victory) || _Utils_eq(model.gameState, $author$project$Minesweeper$Defeat)) && ((!_Utils_eq(
-			msg,
-			$author$project$Minesweeper$ResetGame($author$project$Minesweeper$Easy))) && ((!_Utils_eq(
-			msg,
-			$author$project$Minesweeper$ResetGame($author$project$Minesweeper$Medium))) && (!_Utils_eq(
-			msg,
-			$author$project$Minesweeper$ResetGame($author$project$Minesweeper$Advanced)))))) {
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-		} else {
-			switch (msg.$) {
-				case 'Ignore':
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-				case 'ResetGame':
-					var size = msg.a;
-					return $author$project$Minesweeper$initGame(size);
-				case 'Tick':
-					var newTime = msg.a;
-					return _Utils_eq(model.gameState, $author$project$Minesweeper$OnGoing) ? _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{elapsedTime: model.elapsedTime + 1}),
-						$elm$core$Platform$Cmd$none) : _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-				case 'RightClick':
-					var cell = msg.a;
-					return _Utils_eq(model.gameState, $author$project$Minesweeper$NotStarted) ? _Utils_Tuple2(
-						A2($author$project$Minesweeper$putFlag, cell, model),
-						A2($author$project$Minesweeper$generateMines, cell, model)) : $author$project$Minesweeper$updateGameState(
-						A2($author$project$Minesweeper$putFlag, cell, model));
-				case 'RevealCell':
-					var cell = msg.a;
-					return _Utils_eq(model.gameState, $author$project$Minesweeper$NotStarted) ? _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{gameState: $author$project$Minesweeper$OnGoing}),
-						A2($author$project$Minesweeper$generateMines, cell, model)) : $author$project$Minesweeper$updateGameState(
-						_Utils_update(
-							model,
-							{
-								minefield: A2($author$project$Minesweeper$revealFirstCell, cell, model.minefield)
-							}));
-				case 'PlaceMines':
-					var cell = msg.a;
-					var mines = msg.b;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								minefield: A3(
-									$author$project$Minesweeper$revealCell,
-									cell.x,
-									cell.y,
-									A2($author$project$Minesweeper$placeMines, mines, model))
-							}),
-						$elm$core$Platform$Cmd$none);
-				default:
-					var cell = msg.a;
-					return $author$project$Minesweeper$updateGameState(
-						_Utils_update(
-							model,
-							{
-								minefield: A2($author$project$Minesweeper$expandCell, cell, model.minefield)
-							}));
+		update:
+		while (true) {
+			if ((_Utils_eq(model.gameState, $author$project$Minesweeper$Victory) || _Utils_eq(model.gameState, $author$project$Minesweeper$Defeat)) && ((!_Utils_eq(
+				msg,
+				$author$project$Minesweeper$ResetGame($author$project$Minesweeper$Easy))) && ((!_Utils_eq(
+				msg,
+				$author$project$Minesweeper$ResetGame($author$project$Minesweeper$Medium))) && (!_Utils_eq(
+				msg,
+				$author$project$Minesweeper$ResetGame($author$project$Minesweeper$Advanced)))))) {
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			} else {
+				switch (msg.$) {
+					case 'Ignore':
+						return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					case 'ResetGame':
+						var size = msg.a;
+						return $author$project$Minesweeper$initGame(size);
+					case 'Tick':
+						var newTime = msg.a;
+						return _Utils_eq(model.gameState, $author$project$Minesweeper$OnGoing) ? _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{elapsedTime: model.elapsedTime + 1}),
+							$elm$core$Platform$Cmd$none) : _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					case 'MaybeLongPress':
+						var _v1 = model.longPress;
+						if (_v1.$ === 'Nothing') {
+							return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+						} else {
+							var cell = _v1.a;
+							var $temp$msg = $author$project$Minesweeper$RightClick(cell),
+								$temp$model = model;
+							msg = $temp$msg;
+							model = $temp$model;
+							continue update;
+						}
+					case 'MouseDown':
+						var cell = msg.a;
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{
+									longPress: $elm$core$Maybe$Just(cell)
+								}),
+							A2(
+								$elm$core$Task$perform,
+								$elm$core$Basics$always($author$project$Minesweeper$MaybeLongPress),
+								$elm$core$Process$sleep(1000)));
+					case 'MouseUp':
+						var cell = msg.a;
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{longPress: $elm$core$Maybe$Nothing}),
+							$elm$core$Platform$Cmd$none);
+					case 'RightClick':
+						var cell = msg.a;
+						return _Utils_eq(model.gameState, $author$project$Minesweeper$NotStarted) ? _Utils_Tuple2(
+							A2($author$project$Minesweeper$putFlag, cell, model),
+							A2($author$project$Minesweeper$generateMines, cell, model)) : $author$project$Minesweeper$updateGameState(
+							A2($author$project$Minesweeper$putFlag, cell, model));
+					case 'RevealCell':
+						var cell = msg.a;
+						return _Utils_eq(model.gameState, $author$project$Minesweeper$NotStarted) ? _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{gameState: $author$project$Minesweeper$OnGoing}),
+							A2($author$project$Minesweeper$generateMines, cell, model)) : $author$project$Minesweeper$updateGameState(
+							_Utils_update(
+								model,
+								{
+									minefield: A2($author$project$Minesweeper$revealFirstCell, cell, model.minefield)
+								}));
+					case 'PlaceMines':
+						var cell = msg.a;
+						var mines = msg.b;
+						return _Utils_Tuple2(
+							_Utils_update(
+								model,
+								{
+									minefield: A3(
+										$author$project$Minesweeper$revealCell,
+										cell.x,
+										cell.y,
+										A2($author$project$Minesweeper$placeMines, mines, model))
+								}),
+							$elm$core$Platform$Cmd$none);
+					default:
+						var cell = msg.a;
+						return $author$project$Minesweeper$updateGameState(
+							_Utils_update(
+								model,
+								{
+									minefield: A2($author$project$Minesweeper$expandCell, cell, model.minefield)
+								}));
+				}
 			}
 		}
 	});
@@ -6924,16 +6968,31 @@ var $elm$core$Array$slice = F3(
 var $author$project$Minesweeper$ExpandCell = function (a) {
 	return {$: 'ExpandCell', a: a};
 };
+var $author$project$Minesweeper$MouseDown = function (a) {
+	return {$: 'MouseDown', a: a};
+};
+var $author$project$Minesweeper$MouseUp = function (a) {
+	return {$: 'MouseUp', a: a};
+};
 var $author$project$Minesweeper$RevealCell = function (a) {
 	return {$: 'RevealCell', a: a};
-};
-var $author$project$Minesweeper$RightClick = function (a) {
-	return {$: 'RightClick', a: a};
 };
 var $elm$html$Html$Events$onDoubleClick = function (msg) {
 	return A2(
 		$elm$html$Html$Events$on,
 		'dblclick',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$html$Html$Events$onMouseDown = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'mousedown',
+		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$html$Html$Events$onMouseUp = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'mouseup',
 		$elm$json$Json$Decode$succeed(msg));
 };
 var $author$project$Minesweeper$onRightClick = function (message) {
@@ -6979,7 +7038,11 @@ var $author$project$Minesweeper$viewCell = F2(
 				[
 					$elm$html$Html$Attributes$class('cell'),
 					$author$project$Minesweeper$onRightClick(
-					$author$project$Minesweeper$RightClick(cell))
+					$author$project$Minesweeper$RightClick(cell)),
+					$elm$html$Html$Events$onMouseDown(
+					$author$project$Minesweeper$MouseDown(cell)),
+					$elm$html$Html$Events$onMouseUp(
+					$author$project$Minesweeper$MouseUp(cell))
 				]),
 			_List_fromArray(
 				[
@@ -6990,7 +7053,11 @@ var $author$project$Minesweeper$viewCell = F2(
 				[
 					$elm$html$Html$Attributes$class('cell'),
 					$author$project$Minesweeper$onRightClick(
-					$author$project$Minesweeper$RightClick(cell))
+					$author$project$Minesweeper$RightClick(cell)),
+					$elm$html$Html$Events$onMouseDown(
+					$author$project$Minesweeper$MouseDown(cell)),
+					$elm$html$Html$Events$onMouseUp(
+					$author$project$Minesweeper$MouseUp(cell))
 				]),
 			_List_fromArray(
 				[
@@ -7003,7 +7070,11 @@ var $author$project$Minesweeper$viewCell = F2(
 					$elm$html$Html$Events$onClick(
 					$author$project$Minesweeper$RevealCell(cell)),
 					$author$project$Minesweeper$onRightClick(
-					$author$project$Minesweeper$RightClick(cell))
+					$author$project$Minesweeper$RightClick(cell)),
+					$elm$html$Html$Events$onMouseDown(
+					$author$project$Minesweeper$MouseDown(cell)),
+					$elm$html$Html$Events$onMouseUp(
+					$author$project$Minesweeper$MouseUp(cell))
 				]),
 			_List_fromArray(
 				[
