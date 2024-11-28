@@ -5659,10 +5659,10 @@ var $author$project$Pokertool$generateUserUUID = A2($elm$random$Random$generate,
 var $author$project$Pokertool$LoadingRoomState = function (a) {
 	return {$: 'LoadingRoomState', a: a};
 };
-var $author$project$Pokertool$initLoadingRoom = F3(
-	function (key, roomId, user) {
+var $author$project$Pokertool$initLoadingRoom = F4(
+	function (key, apiUrl, roomId, user) {
 		return $author$project$Pokertool$LoadingRoomState(
-			{inputRoomId: '', inputUser: '', key: key, roomId: roomId, user: user, userUuid: ''});
+			{apiUrl: apiUrl, inputRoomId: '', inputUser: '', key: key, roomId: roomId, user: user, userUuid: ''});
 	});
 var $author$project$Room$Room = F4(
 	function (user, id, revealed, members) {
@@ -6499,11 +6499,12 @@ var $author$project$Room$roomDecoder = function (a) {
 		A2($elm$json$Json$Decode$field, 'Revealed', $elm$json$Json$Decode$bool),
 		A2($elm$json$Json$Decode$field, 'Members', $author$project$Room$membersDecoder));
 };
-var $author$project$Room$urlAddress = function (part) {
-	return '/room' + part;
-};
-var $author$project$Room$create = F2(
-	function (user, event) {
+var $author$project$Room$urlAddress = F2(
+	function (apiUrl, part) {
+		return apiUrl + ('room' + part);
+	});
+var $author$project$Room$create = F3(
+	function (apiUrl, user, event) {
 		return $elm$http$Http$post(
 			{
 				body: $elm$http$Http$emptyBody,
@@ -6512,13 +6513,13 @@ var $author$project$Room$create = F2(
 					event,
 					$author$project$Room$roomDecoder(
 						$author$project$Room$Room(user))),
-				url: $author$project$Room$urlAddress('?user=') + (user.name + ('&userId=' + user.id))
+				url: A2($author$project$Room$urlAddress, apiUrl, '?user=') + (user.name + ('&userId=' + user.id))
 			});
 	});
-var $author$project$Room$join = F3(
-	function (roomId, user, event) {
+var $author$project$Room$join = F4(
+	function (apiUrl, roomId, user, event) {
 		if (roomId.$ === 'Nothing') {
-			return A2($author$project$Room$create, user, event);
+			return A3($author$project$Room$create, apiUrl, user, event);
 		} else {
 			var id = roomId.a;
 			return $elm$http$Http$post(
@@ -6529,7 +6530,7 @@ var $author$project$Room$join = F3(
 						event,
 						$author$project$Room$roomDecoder(
 							$author$project$Room$Room(user))),
-					url: $author$project$Room$urlAddress('/join?id=') + (id + ('&user=' + (user.name + ('&userId=' + user.id))))
+					url: A2($author$project$Room$urlAddress, apiUrl, '/join?id=') + (id + ('&user=' + (user.name + ('&userId=' + user.id))))
 				});
 		}
 	});
@@ -6542,20 +6543,21 @@ var $author$project$Pokertool$init = F3(
 			if (_v1.$ === 'Just') {
 				var user = _v1.a;
 				return _Utils_Tuple2(
-					A3($author$project$Pokertool$initLoadingRoom, key, flags.roomId, flags.user),
-					A3(
+					A4($author$project$Pokertool$initLoadingRoom, key, flags.apiUrl, flags.roomId, flags.user),
+					A4(
 						$author$project$Room$join,
+						flags.apiUrl,
 						$elm$core$Maybe$Just(roomId),
 						user,
 						$author$project$Pokertool$GotRoom));
 			} else {
 				return _Utils_Tuple2(
-					A3($author$project$Pokertool$initLoadingRoom, key, flags.roomId, flags.user),
+					A4($author$project$Pokertool$initLoadingRoom, key, flags.apiUrl, flags.roomId, flags.user),
 					$author$project$Pokertool$generateUserUUID);
 			}
 		} else {
 			return _Utils_Tuple2(
-				A3($author$project$Pokertool$initLoadingRoom, key, flags.roomId, flags.user),
+				A4($author$project$Pokertool$initLoadingRoom, key, flags.apiUrl, flags.roomId, flags.user),
 				$author$project$Pokertool$generateUserUUID);
 		}
 	});
@@ -6852,8 +6854,8 @@ var $author$project$Pokertool$subscriptions = function (_v0) {
 var $author$project$Pokertool$FullLoadedRoomState = function (a) {
 	return {$: 'FullLoadedRoomState', a: a};
 };
-var $author$project$Room$castVote = F3(
-	function (room, vote, event) {
+var $author$project$Room$castVote = F4(
+	function (apiUrl, room, vote, event) {
 		return $elm$http$Http$post(
 			{
 				body: $elm$http$Http$emptyBody,
@@ -6862,18 +6864,22 @@ var $author$project$Room$castVote = F3(
 					event,
 					$author$project$Room$roomDecoder(
 						$author$project$Room$Room(room.user))),
-				url: $author$project$Room$urlAddress('/vote?id=') + (room.id + ('&userId=' + (room.user.id + ('&vote=' + $elm$core$String$fromInt(vote)))))
+				url: A2(
+					$author$project$Room$urlAddress,
+					apiUrl,
+					'/vote?id=' + (room.id + ('&userId=' + (room.user.id + ('&vote=' + $elm$core$String$fromInt(vote))))))
 			});
 	});
-var $author$project$Pokertool$LoadedRoom = F5(
-	function (key, room, user, values, lastPing) {
-		return {key: key, lastPing: lastPing, room: room, user: user, values: values};
+var $author$project$Pokertool$LoadedRoom = F6(
+	function (key, apiUrl, room, user, values, lastPing) {
+		return {apiUrl: apiUrl, key: key, lastPing: lastPing, room: room, user: user, values: values};
 	});
-var $author$project$Pokertool$initFullRoom = F3(
-	function (key, room, user) {
-		return A5(
+var $author$project$Pokertool$initFullRoom = F4(
+	function (key, apiUrl, room, user) {
+		return A6(
 			$author$project$Pokertool$LoadedRoom,
 			key,
+			apiUrl,
 			room,
 			user,
 			_List_fromArray(
@@ -6884,10 +6890,10 @@ var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Pokertool$emptyLoadingRoom = F2(
-	function (key, roomId) {
+var $author$project$Pokertool$emptyLoadingRoom = F3(
+	function (key, apiUrl, roomId) {
 		return $author$project$Pokertool$LoadingRoomState(
-			{inputRoomId: '', inputUser: '', key: key, roomId: roomId, user: $elm$core$Maybe$Nothing, userUuid: ''});
+			{apiUrl: apiUrl, inputRoomId: '', inputUser: '', key: key, roomId: roomId, user: $elm$core$Maybe$Nothing, userUuid: ''});
 	});
 var $elm$json$Json$Encode$null = _Json_encodeNull;
 var $author$project$Pokertool$logoutPort = _Platform_outgoingPort(
@@ -6896,22 +6902,23 @@ var $author$project$Pokertool$logoutPort = _Platform_outgoingPort(
 		return $elm$json$Json$Encode$null;
 	});
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
-var $author$project$Pokertool$onLoggedOut = function (key) {
-	return _Utils_Tuple2(
-		A2($author$project$Pokertool$emptyLoadingRoom, key, $elm$core$Maybe$Nothing),
-		$elm$core$Platform$Cmd$batch(
-			_List_fromArray(
-				[
-					$author$project$Pokertool$logoutPort(_Utils_Tuple0),
-					$author$project$Pokertool$generateUserUUID,
-					A2($elm$browser$Browser$Navigation$pushUrl, key, '/')
-				])));
-};
+var $author$project$Pokertool$onLoggedOut = F2(
+	function (key, apiUrl) {
+		return _Utils_Tuple2(
+			A3($author$project$Pokertool$emptyLoadingRoom, key, apiUrl, $elm$core$Maybe$Nothing),
+			$elm$core$Platform$Cmd$batch(
+				_List_fromArray(
+					[
+						$author$project$Pokertool$logoutPort(_Utils_Tuple0),
+						$author$project$Pokertool$generateUserUUID,
+						A2($elm$browser$Browser$Navigation$pushUrl, key, '/')
+					])));
+	});
 var $author$project$Pokertool$LoggedOut = function (a) {
 	return {$: 'LoggedOut', a: a};
 };
-var $author$project$Room$leave = F3(
-	function (roomId, user, event) {
+var $author$project$Room$leave = F4(
+	function (apiUrl, roomId, user, event) {
 		return $elm$http$Http$post(
 			{
 				body: $elm$http$Http$emptyBody,
@@ -6920,27 +6927,27 @@ var $author$project$Room$leave = F3(
 					event,
 					$author$project$Room$roomDecoder(
 						$author$project$Room$Room(user))),
-				url: $author$project$Room$urlAddress('/leave?id=') + (roomId + ('&userId=' + user.id))
+				url: A2($author$project$Room$urlAddress, apiUrl, '/leave?id=') + (roomId + ('&userId=' + user.id))
 			});
 	});
-var $author$project$Pokertool$onLogout = F3(
-	function (key, maybeRoomId, user) {
+var $author$project$Pokertool$onLogout = F4(
+	function (key, apiUrl, maybeRoomId, user) {
 		if (maybeRoomId.$ === 'Nothing') {
-			return $author$project$Pokertool$onLoggedOut(key);
+			return A2($author$project$Pokertool$onLoggedOut, key, apiUrl);
 		} else {
 			var roomId = maybeRoomId.a;
 			if (user.$ === 'Just') {
 				var u = user.a;
 				return _Utils_Tuple2(
-					A2($author$project$Pokertool$emptyLoadingRoom, key, $elm$core$Maybe$Nothing),
-					A3($author$project$Room$leave, roomId, u, $author$project$Pokertool$LoggedOut));
+					A3($author$project$Pokertool$emptyLoadingRoom, key, apiUrl, $elm$core$Maybe$Nothing),
+					A4($author$project$Room$leave, apiUrl, roomId, u, $author$project$Pokertool$LoggedOut));
 			} else {
-				return $author$project$Pokertool$onLoggedOut(key);
+				return A2($author$project$Pokertool$onLoggedOut, key, apiUrl);
 			}
 		}
 	});
-var $author$project$Room$ping = F3(
-	function (roomId, user, event) {
+var $author$project$Room$ping = F4(
+	function (apiUrl, roomId, user, event) {
 		return $elm$http$Http$post(
 			{
 				body: $elm$http$Http$emptyBody,
@@ -6949,11 +6956,11 @@ var $author$project$Room$ping = F3(
 					event,
 					$author$project$Room$roomDecoder(
 						$author$project$Room$Room(user))),
-				url: $author$project$Room$urlAddress('/ping?id=') + (roomId + ('&userId=' + user.id))
+				url: A2($author$project$Room$urlAddress, apiUrl, '/ping?id=') + (roomId + ('&userId=' + user.id))
 			});
 	});
-var $author$project$Room$reset = F2(
-	function (room, event) {
+var $author$project$Room$reset = F3(
+	function (apiUrl, room, event) {
 		return $elm$http$Http$post(
 			{
 				body: $elm$http$Http$emptyBody,
@@ -6963,12 +6970,12 @@ var $author$project$Room$reset = F2(
 					$author$project$Room$roomDecoder(
 						$author$project$Room$Room(room.user))),
 				url: _Utils_ap(
-					$author$project$Room$urlAddress('/reset?id='),
+					A2($author$project$Room$urlAddress, apiUrl, '/reset?id='),
 					room.id)
 			});
 	});
-var $author$project$Room$reveal = F2(
-	function (room, event) {
+var $author$project$Room$reveal = F3(
+	function (apiUrl, room, event) {
 		return $elm$http$Http$post(
 			{
 				body: $elm$http$Http$emptyBody,
@@ -6978,7 +6985,7 @@ var $author$project$Room$reveal = F2(
 					$author$project$Room$roomDecoder(
 						$author$project$Room$Room(room.user))),
 				url: _Utils_ap(
-					$author$project$Room$urlAddress('/reveal?id='),
+					A2($author$project$Room$urlAddress, apiUrl, '/reveal?id='),
 					room.id)
 			});
 	});
@@ -7198,8 +7205,9 @@ var $author$project$Pokertool$update = F2(
 							var roomId = _v3.a;
 							return _Utils_Tuple2(
 								model,
-								A3(
+								A4(
 									$author$project$Room$join,
+									loadingRoom.apiUrl,
 									$elm$core$Maybe$Just(roomId),
 									u,
 									$author$project$Pokertool$GotRoom));
@@ -7230,7 +7238,7 @@ var $author$project$Pokertool$update = F2(
 						var user = _v4.a;
 						return _Utils_Tuple2(
 							model,
-							A2($author$project$Room$create, user, $author$project$Pokertool$GotRoom));
+							A3($author$project$Room$create, loadingRoom.apiUrl, user, $author$project$Pokertool$GotRoom));
 					} else {
 						return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 					}
@@ -7240,7 +7248,7 @@ var $author$project$Pokertool$update = F2(
 						var room = result.a;
 						return _Utils_Tuple2(
 							$author$project$Pokertool$FullLoadedRoomState(
-								A3($author$project$Pokertool$initFullRoom, loadingRoom.key, room, room.user)),
+								A4($author$project$Pokertool$initFullRoom, loadingRoom.key, loadingRoom.apiUrl, room, room.user)),
 							$author$project$Pokertool$storeUserPort(room.user));
 					} else {
 						return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
@@ -7248,8 +7256,9 @@ var $author$project$Pokertool$update = F2(
 				case 'JoinRoom':
 					return _Utils_Tuple2(
 						model,
-						A3(
+						A4(
 							$author$project$Room$join,
+							loadingRoom.apiUrl,
 							loadingRoom.roomId,
 							A2($author$project$Room$User, loadingRoom.userUuid, loadingRoom.inputUser),
 							$author$project$Pokertool$GotRoom));
@@ -7297,23 +7306,23 @@ var $author$project$Pokertool$update = F2(
 					}
 				case 'UrlChanged':
 					var url = msg.a;
-					var d = A2($elm$core$Debug$log, 'url changed: ', url);
 					var _v7 = url.path;
 					if (_v7 === '/logout') {
-						return A3($author$project$Pokertool$onLogout, loadingRoom.key, loadingRoom.roomId, loadingRoom.user);
+						return A4($author$project$Pokertool$onLogout, loadingRoom.key, loadingRoom.apiUrl, loadingRoom.roomId, loadingRoom.user);
 					} else {
 						return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 					}
 				case 'Logout':
 					var roomId = msg.a;
 					var user = msg.b;
-					return A3(
+					return A4(
 						$author$project$Pokertool$onLogout,
 						loadingRoom.key,
+						loadingRoom.apiUrl,
 						roomId,
 						$elm$core$Maybe$Just(user));
 				case 'LoggedOut':
-					return $author$project$Pokertool$onLoggedOut(loadingRoom.key);
+					return A2($author$project$Pokertool$onLoggedOut, loadingRoom.key, loadingRoom.apiUrl);
 				default:
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			}
@@ -7324,15 +7333,15 @@ var $author$project$Pokertool$update = F2(
 					var vote = msg.a;
 					return _Utils_Tuple2(
 						model,
-						A3($author$project$Room$castVote, loadedRoom.room, vote, $author$project$Pokertool$GotRoom));
+						A4($author$project$Room$castVote, loadedRoom.apiUrl, loadedRoom.room, vote, $author$project$Pokertool$GotRoom));
 				case 'Reveal':
 					return _Utils_Tuple2(
 						model,
-						A2($author$project$Room$reveal, loadedRoom.room, $author$project$Pokertool$GotRoom));
+						A3($author$project$Room$reveal, loadedRoom.apiUrl, loadedRoom.room, $author$project$Pokertool$GotRoom));
 				case 'Reset':
 					return _Utils_Tuple2(
 						model,
-						A2($author$project$Room$reset, loadedRoom.room, $author$project$Pokertool$GotRoom));
+						A3($author$project$Room$reset, loadedRoom.apiUrl, loadedRoom.room, $author$project$Pokertool$GotRoom));
 				case 'GotPing':
 					var posix = msg.a;
 					var result = msg.b;
@@ -7367,13 +7376,14 @@ var $author$project$Pokertool$update = F2(
 				case 'Logout':
 					var roomId = msg.a;
 					var user = msg.b;
-					return A3(
+					return A4(
 						$author$project$Pokertool$onLogout,
 						loadedRoom.key,
+						loadedRoom.apiUrl,
 						roomId,
 						$elm$core$Maybe$Just(user));
 				case 'LoggedOut':
-					return $author$project$Pokertool$onLoggedOut(loadedRoom.key);
+					return A2($author$project$Pokertool$onLoggedOut, loadedRoom.key, loadedRoom.apiUrl);
 				case 'Ping':
 					var posix = msg.a;
 					return _Utils_Tuple2(
@@ -7383,7 +7393,7 @@ var $author$project$Pokertool$update = F2(
 								{
 									lastPing: ($elm$time$Time$posixToMillis(posix) / 1000) | 0
 								})),
-						A3($author$project$Room$ping, loadedRoom.room.id, loadedRoom.user, $author$project$Pokertool$GotRoom));
+						A4($author$project$Room$ping, loadedRoom.apiUrl, loadedRoom.room.id, loadedRoom.user, $author$project$Pokertool$GotRoom));
 				case 'LinkClicked':
 					var urlRequest = msg.a;
 					if (urlRequest.$ === 'Internal') {
@@ -7405,9 +7415,10 @@ var $author$project$Pokertool$update = F2(
 					var d = A2($elm$core$Debug$log, 'url changed: ', url);
 					var _v12 = url.path;
 					if (_v12 === '/logout') {
-						return A3(
+						return A4(
 							$author$project$Pokertool$onLogout,
 							loadedRoom.key,
+							loadedRoom.apiUrl,
 							$elm$core$Maybe$Just(loadedRoom.room.id),
 							$elm$core$Maybe$Just(loadedRoom.user));
 					} else {
@@ -8727,8 +8738,13 @@ _Platform_export({'Pokertool':{'init':$author$project$Pokertool$main(
 			return A2(
 				$elm$json$Json$Decode$andThen,
 				function (roomId) {
-					return $elm$json$Json$Decode$succeed(
-						{roomId: roomId, user: user});
+					return A2(
+						$elm$json$Json$Decode$andThen,
+						function (apiUrl) {
+							return $elm$json$Json$Decode$succeed(
+								{apiUrl: apiUrl, roomId: roomId, user: user});
+						},
+						A2($elm$json$Json$Decode$field, 'apiUrl', $elm$json$Json$Decode$string));
 				},
 				A2(
 					$elm$json$Json$Decode$field,
