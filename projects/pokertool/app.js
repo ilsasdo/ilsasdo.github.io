@@ -6547,7 +6547,7 @@ var $author$project$Pokertool$init = F3(
 					A4($author$project$Pokertool$initLoadingRoom, key, $author$project$Environment$apiUrl, flags.roomId, flags.user),
 					A4(
 						$author$project$Room$join,
-						flags.apiUrl,
+						$author$project$Environment$apiUrl,
 						$elm$core$Maybe$Just(roomId),
 						user,
 						$author$project$Pokertool$GotRoom));
@@ -8737,13 +8737,8 @@ _Platform_export({'Pokertool':{'init':$author$project$Pokertool$main(
 			return A2(
 				$elm$json$Json$Decode$andThen,
 				function (roomId) {
-					return A2(
-						$elm$json$Json$Decode$andThen,
-						function (apiUrl) {
-							return $elm$json$Json$Decode$succeed(
-								{apiUrl: apiUrl, roomId: roomId, user: user});
-						},
-						A2($elm$json$Json$Decode$field, 'apiUrl', $elm$json$Json$Decode$string));
+					return $elm$json$Json$Decode$succeed(
+						{roomId: roomId, user: user});
 				},
 				A2(
 					$elm$json$Json$Decode$field,
