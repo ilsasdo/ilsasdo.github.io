@@ -15,8 +15,7 @@
   let app = Elm.Pokertool.init({
     flags: {
       roomId: new URLSearchParams(window.location.search).get("id"),
-      user: getUser(),
-      apiUrl: process.env.ELM_APP_API_URL
+      user: getUser()
     },
     node: document.getElementById('app')
   });

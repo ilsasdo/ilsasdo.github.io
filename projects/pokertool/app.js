@@ -5428,6 +5428,7 @@ var $elm$json$Json$Decode$field = _Json_decodeField;
 var $author$project$Pokertool$GotRoom = function (a) {
 	return {$: 'GotRoom', a: a};
 };
+var $author$project$Environment$apiUrl = '';
 var $author$project$Pokertool$UuidGenerated = function (a) {
 	return {$: 'UuidGenerated', a: a};
 };
@@ -6543,7 +6544,7 @@ var $author$project$Pokertool$init = F3(
 			if (_v1.$ === 'Just') {
 				var user = _v1.a;
 				return _Utils_Tuple2(
-					A4($author$project$Pokertool$initLoadingRoom, key, flags.apiUrl, flags.roomId, flags.user),
+					A4($author$project$Pokertool$initLoadingRoom, key, $author$project$Environment$apiUrl, flags.roomId, flags.user),
 					A4(
 						$author$project$Room$join,
 						flags.apiUrl,
@@ -6552,12 +6553,12 @@ var $author$project$Pokertool$init = F3(
 						$author$project$Pokertool$GotRoom));
 			} else {
 				return _Utils_Tuple2(
-					A4($author$project$Pokertool$initLoadingRoom, key, flags.apiUrl, flags.roomId, flags.user),
+					A4($author$project$Pokertool$initLoadingRoom, key, $author$project$Environment$apiUrl, flags.roomId, flags.user),
 					$author$project$Pokertool$generateUserUUID);
 			}
 		} else {
 			return _Utils_Tuple2(
-				A4($author$project$Pokertool$initLoadingRoom, key, flags.apiUrl, flags.roomId, flags.user),
+				A4($author$project$Pokertool$initLoadingRoom, key, $author$project$Environment$apiUrl, flags.roomId, flags.user),
 				$author$project$Pokertool$generateUserUUID);
 		}
 	});
@@ -6887,7 +6888,6 @@ var $author$project$Pokertool$initFullRoom = F4(
 			0);
 	});
 var $elm$browser$Browser$Navigation$load = _Browser_load;
-var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Pokertool$emptyLoadingRoom = F3(
@@ -7412,7 +7412,6 @@ var $author$project$Pokertool$update = F2(
 					}
 				case 'UrlChanged':
 					var url = msg.a;
-					var d = A2($elm$core$Debug$log, 'url changed: ', url);
 					var _v12 = url.path;
 					if (_v12 === '/logout') {
 						return A4(
