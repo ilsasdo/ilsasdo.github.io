@@ -5428,7 +5428,7 @@ var $elm$json$Json$Decode$field = _Json_decodeField;
 var $author$project$Pokertool$GotRoom = function (a) {
 	return {$: 'GotRoom', a: a};
 };
-var $author$project$Environment$apiUrl = '';
+var $author$project$Environment$apiUrl = 'https://ndcnd2zhda.execute-api.eu-west-1.amazonaws.com/';
 var $author$project$Pokertool$UuidGenerated = function (a) {
 	return {$: 'UuidGenerated', a: a};
 };
