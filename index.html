@@ -120,10 +120,7 @@
     }
 
     .about-content {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 40px;
-      align-items: start;
+      display: block;
     }
 
     .about-text {
@@ -307,10 +304,6 @@
         font-size: 1rem;
       }
 
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-
       .projects-grid {
         grid-template-columns: 1fr;
       }
@@ -338,7 +331,7 @@
 <header>
   <div class="container">
     <h1>Enrico Sasdelli</h1>
-    <p>Sviluppatore & Appassionato di Tecnologia</p>
+    <p>Sviluppatore Software</p>
   </div>
 </header>
 
@@ -358,13 +351,11 @@
     <h2>Chi Sono</h2>
     <div class="about-content">
       <div>
-        <p>Sono uno sviluppatore appassionato con una passione per creare soluzioni eleganti a problemi complessi. Mi piace lavorare con tecnologie
-          moderne e condividere conoscenze con la community.</p>
-        <p>Quando non sto programmando, mi puoi trovare ad esplorare nuove tecnologie, contribuire a progetti open source, o a parlare a conferenze
-          tecnologiche.</p>
-      </div>
-      <div>
-        <h3 style="margin-bottom: 15px; font-size: 1.3rem;">Competenze & Tecnologie</h3>
+        <p>Sono uno sviluppatore software con <strong>oltre 15 anni di esperienza</strong>, <em>specializzato nello sviluppo backend</em>, con solide competenze anche in ambito DevOps e frontend.</p>
+        <p>Ho lavorato principalmente su progetti enterprise, sviluppando una buona capacità di affrontare <em>sistemi complessi e codice legacy</em>, che mi piace migliorare attraverso <strong>refactoring mirati</strong> per aumentare leggibilità, testabilità e manutenibilità.</p>
+        <p>Presto grande attenzione alla <strong>qualità del software</strong>, mantenendo il controllo dell'architettura del codice per produrre sistemi ben organizzati e facili da evolvere. Lavoro con una <em>visione di lungo periodo</em>, costruendo sistemi che siano facili da estendere ed evolvere nel tempo.</p>
+        <p>Negli ultimi anni ho iniziato a condividere la mia esperienza partecipando come <em>speaker a conferenze</em> locali per sviluppatori.</p>
+        <h3 style="margin-top: 30px; margin-bottom: 15px; font-size: 1.3rem;">Competenze & Tecnologie</h3>
         <div class="skills">
           <span class="skill-tag">Java</span>
           <span class="skill-tag">Spring / SpringBoot</span>
@@ -383,25 +374,66 @@
     <h2>Progetti GitHub</h2>
     <div class="projects-grid">
       <div class="project-card">
-        <h3>Nome Progetto</h3>
-        <p>Una breve descrizione del tuo progetto. Cosa fa, quali tecnologie utilizza e perché è interessante.</p>
+        <h3>intellij-elm</h3>
+        <p>Contributo al plugin elm per intellij per migliorare il syntax highlight</p>
         <div class="project-links">
-          <a href="https://github.com/yourusername/project" target="_blank">GitHub →</a>
-          <a href="https://project-demo.com" target="_blank">Demo Live →</a>
+          <a href="https://github.com/ilsasdo/intellij-elm" target="_blank">GitHub →</a>
         </div>
       </div>
       <div class="project-card">
-        <h3>Altro Progetto</h3>
-        <p>Descrizione di un altro progetto. Evidenzia le caratteristiche principali e le tecnologie utilizzate in questo progetto.</p>
+        <h3>htmltopdf</h3>
+        <p>Progetto per convertire HTML in PDF o immagini utilizzando Puppeteer e ChromeForTesting</p>
         <div class="project-links">
-          <a href="https://github.com/yourusername/another-project" target="_blank">GitHub →</a>
+          <a href="https://github.com/ilsasdo/htmltopdf" target="_blank">GitHub →</a>
         </div>
       </div>
       <div class="project-card">
-        <h3>Contributo Open Source</h3>
-        <p>Descrizione di un progetto open source a cui hai contribuito o che mantieni.</p>
+        <h3>pokertool</h3>
+        <p>Strumento per poker planning e stime scrum scritto in Elm con backend serverless su AWS</p>
         <div class="project-links">
-          <a href="https://github.com/yourusername/opensource" target="_blank">GitHub →</a>
+          <a href="https://github.com/ilsasdo/pokertool" target="_blank">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>sudoku</h3>
+        <p>Risolutore di Sudoku implementato in Elm</p>
+        <div class="project-links">
+          <a href="https://github.com/ilsasdo/sudoku" target="_blank">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>rainmeter-httprequest</h3>
+        <p>Plugin per Rainmeter per effettuare richieste HTTP, incluso supporto per POST e integrazione con JsonParser per servizi REST</p>
+        <div class="project-links">
+          <a href="https://github.com/ilsasdo/rainmeter-httprequest" target="_blank">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>elm-minesweeper</h3>
+        <p>Implementazione del gioco Campo Minato in Elm</p>
+        <div class="project-links">
+          <a href="https://github.com/ilsasdo/elm-minesweeper" target="_blank">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>chirp</h3>
+        <p>Progetto sviluppato in Elm</p>
+        <div class="project-links">
+          <a href="https://github.com/ilsasdo/chirp" target="_blank">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>elm-cavevscave</h3>
+        <p>Gioco sviluppato in Elm</p>
+        <div class="project-links">
+          <a href="https://github.com/ilsasdo/elm-cavevscave" target="_blank">GitHub →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>snake</h3>
+        <p>Implementazione del classico gioco Snake in Elm</p>
+        <div class="project-links">
+          <a href="https://github.com/ilsasdo/snake" target="_blank">GitHub →</a>
         </div>
       </div>
     </div>
