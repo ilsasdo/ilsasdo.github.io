@@ -270,6 +270,54 @@
       color: var(--secondary-color);
     }
 
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .experience-item {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--primary-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .experience-item:hover {
+      transform: translateX(5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .experience-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--text-color);
+    }
+
+    .experience-meta {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .experience-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .experience-item p {
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
     footer {
       background-color: var(--text-color);
       color: white;
@@ -339,6 +387,7 @@
   <div class="container">
     <ul>
       <li><a href="#about">Chi Sono</a></li>
+      <li><a href="#experience">Esperienza</a></li>
       <li><a href="#projects">Progetti</a></li>
       <li><a href="#conferences">Conferenze</a></li>
       <li><a href="#contact">Contatti</a></li>
@@ -364,6 +413,56 @@
           <span class="skill-tag">DevOps</span>
           <span class="skill-tag">AWS</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <h2>Esperienza Lavorativa</h2>
+    <div class="experience-list">
+      <div class="experience-item">
+        <h3>Fullstack Software Engineer</h3>
+        <div class="experience-meta">
+          <span>🏢 MotorK</span>
+          <span>📍 Milano</span>
+          <span>📆 2022 - Presente</span>
+        </div>
+        <p>In MotorK ho contribuito a migliorare le pipeline di build/test/rilascio: inizialmente erano presenti oltre 200 pipeline differenti suddivise in circa 50 progetti. Le ho ridotte ad una sola, facilitando notevolmente la gestione sia dei progetti nuovi che di quelli esistenti.</p>
+        <p>Ho risolto la maggior parte dei problemi legati a concorrenza e transazioni presenti.</p>
+        <p>Ho introdotto con successo VueJS come tecnologia frontend per evolvere un vecchio frontend legacy basato su gsp.</p>
+        <p>Ho contribuito alla riscrittura e al netto miglioramento di un sottosistema core di MotorK, ottenendo prestazioni fino a 100 volte superiori, pur utilizzando un decimo delle risorse precedentemente richieste.</p>
+      </div>
+      <div class="experience-item">
+        <h3>Analista Sviluppatore / DevOps</h3>
+        <div class="experience-meta">
+          <span>🏢 Area Ricerca e Standard, Gruppo Finmatica</span>
+          <span>📍 Bologna</span>
+          <span>📆 2019 - 2022</span>
+        </div>
+        <p>Collaboro all'automazione del provisioning e deployment degli applicativi sul parco di più di 400 clienti on premise. Eredito, gestisco ed evolvo oltre 20 tra prodotti e librerie interne.</p>
+        <p>Sono il punto di riferimento tecnico nell'ambito del ramo PA.</p>
+        <p>Realizzo il CMDB interno per la gestione dei collegamenti verso i clienti in ReactJS, GraphQL e SpringBoot.</p>
+      </div>
+      <div class="experience-item">
+        <h3>Analista Sviluppatore</h3>
+        <div class="experience-meta">
+          <span>🏢 Area Segreteria, Gruppo Finmatica</span>
+          <span>📍 Bologna</span>
+          <span>📆 2007 - 2019</span>
+        </div>
+        <p>Lavoro su 4 progetti con più di 120 installazioni differenti. Mi distinguo come un ottimo sviluppatore Java, e divento il riferimento tecnico per lo sviluppo nei vari gruppi di lavoro che ho attraversato operando scelte tecniche poi estese anche ad altre parti dell'azienda.</p>
+        <p>Contribuisco allo sviluppo della piattaforma di Continuous Integration con Git, Jenkins, Redmine dell'intera azienda.</p>
+      </div>
+      <div class="experience-item">
+        <h3>Tirocinante</h3>
+        <div class="experience-meta">
+          <span>🏢 Software di Firma con Smartcard, Gruppo Finmatica</span>
+          <span>📍 Bologna</span>
+          <span>📆 2006</span>
+        </div>
+        <p>Realizzo un applet java richiamabile dal browser per la firma digitale direttamente dalla pagina web. Questo stesso progetto è utilizzato ancora oggi ed è una delle componenti chiave dei software Finmatica.</p>
       </div>
     </div>
   </div>
@@ -531,12 +630,9 @@
 
 <footer id="contact">
   <div class="container">
-    <p>&copy; 2024 Enrico Sasdelli. Tutti i diritti riservati.</p>
     <div class="social-links">
-      <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-      <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
-      <a href="mailto:your.email@example.com">Email</a>
+      <a href="https://github.com/ilsasdo" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/enrico-sasdelli" target="_blank">LinkedIn</a>
     </div>
   </div>
 </footer>
