@@ -77,15 +77,28 @@
 }</component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1770451242493" />
-    <option name="spentUsd" value="0.0705585" />
+    <option name="spentUsd" value="0.10228716" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="8" />
+    <option name="suspendCountdown" value="0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ilsasdo.github.io" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ilsasdo.github.io" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -103,7 +116,8 @@
       <updated>1748598098702</updated>
       <workItem from="1768664039552" duration="3721000" />
       <workItem from="1768729434377" duration="245000" />
-      <workItem from="1768809514026" duration="63000" />
+      <workItem from="1768809514026" duration="1402000" />
+      <workItem from="1768900854393" duration="310000" />
     </task>
     <task id="LOCAL-00001" summary="new theme">
       <option name="closed" value="true" />
@@ -129,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768667819115</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="revamp">
+      <option name="closed" value="true" />
+      <created>1768809583017</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1768809583017</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
