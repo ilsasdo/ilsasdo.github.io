@@ -57,6 +57,27 @@
       font-weight: 300;
     }
 
+    .cv-download-button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 30px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .cv-download-button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
     nav {
       background-color: var(--bg-color);
       border-bottom: 1px solid var(--border-color);
@@ -352,6 +373,11 @@
         font-size: 1rem;
       }
 
+      .cv-download-button {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+      }
+
       .projects-grid {
         grid-template-columns: 1fr;
       }
@@ -491,7 +517,7 @@
       <li><a href="#experience">Esperienza</a></li>
       <li><a href="#projects">Progetti</a></li>
       <li><a href="#conferences">Conferenze</a></li>
-      <li><a href="#contact">Contatti</a></li>
+      <li><a href="download/CV_Enrico_Sasdelli.pdf" download>Scarica il CV</a></li>
     </ul>
   </div>
 </nav>
@@ -734,6 +760,7 @@
     <div class="social-links">
       <a href="https://github.com/ilsasdo" target="_blank">GitHub</a>
       <a href="https://linkedin.com/in/enrico-sasdelli" target="_blank">LinkedIn</a>
+      <a href="download/CV_Enrico_Sasdelli.pdf" download>Scarica il CV</a>
     </div>
   </div>
 </footer>
@@ -808,6 +835,16 @@
     }
   }
 
+  // Track CV download clicks
+  function trackCVDownload() {
+    if (window.gtag && getCookieConsent() === COOKIE_CONSENT_ACCEPTED) {
+      window.gtag('event', 'cv_download', {
+        'event_category': 'download',
+        'event_label': 'CV_Enrico_Sasdelli.pdf'
+      });
+    }
+  }
+
   // Check cookie consent on page load
   document.addEventListener('DOMContentLoaded', function() {
     const consent = getCookieConsent();
@@ -819,6 +856,14 @@
       loadGoogleAnalytics();
     }
     // If declined, do nothing (don't load Google Analytics)
+
+    // Add click event listeners to CV download links
+    const cvLinks = document.querySelectorAll('a[href*="CV_Enrico_Sasdelli.pdf"]');
+    cvLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        trackCVDownload();
+      });
+    });
   });
 </script>
 </body>
